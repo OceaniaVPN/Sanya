@@ -19,7 +19,7 @@ img{max-width:100%;display:block}
 .flame{display:inline-block;animation:flick 1s infinite alternate}
 @keyframes flick{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
 nav{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto}
-nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.5px;padding:6px 2px;border-bottom:3px solid transparent;white-space:nowrap}
+nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.5px;padding:6px 2px;border-bottom:3px solid transparent;white-space:nowrap;cursor:pointer}
 nav a:hover{border-color:var(--red);color:var(--red)}
 .head-right{display:flex;gap:8px;align-items:center}
 .corr-btn{background:var(--dark);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
@@ -27,7 +27,8 @@ nav a:hover{border-color:var(--red);color:var(--red)}
 .live{background:var(--red);color:#fff;font-weight:700;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
 .live .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 1s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
-.breaking{display:flex;align-items:center;background:var(--red);color:#fff;overflow:hidden}
+.breaking{display:flex;align-items:center;color:#fff;overflow:hidden;background:repeating-linear-gradient(45deg,var(--red) 0 20px,#a4001f 20px 40px);animation:stripe 3s linear infinite}
+@keyframes stripe{to{background-position:56px 0}}
 .breaking-label{background:var(--dark);padding:10px 18px;font-weight:900;letter-spacing:2px;animation:blink 1.2s steps(2) infinite;white-space:nowrap}
 @keyframes blink{50%{opacity:.55}}
 .ticker{overflow:hidden;flex:1}
@@ -38,35 +39,31 @@ nav a:hover{border-color:var(--red);color:var(--red)}
 @media(max-width:900px){.layout{grid-template-columns:1fr}}
 .tags span{background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;letter-spacing:1px;margin-right:6px}
 .tags span.alt{background:var(--dark)}
-h1{font-size:clamp(24px,4vw,44px);line-height:1.15;margin:14px 0 12px;font-weight:900;word-wrap:break-word}
+h1{font-size:clamp(24px,4vw,44px);line-height:1.15;margin:14px 0 12px;font-weight:900;word-wrap:break-word;background:linear-gradient(90deg,#111 20%,var(--red) 50%,#111 80%);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:grad 4s linear infinite}
+@keyframes grad{to{background-position:200%}}
 .lead{font-size:17px;color:#333;line-height:1.6;border-left:4px solid var(--red);padding-left:14px;margin-bottom:14px}
-.meta{color:var(--mut);font-size:13px;margin-bottom:18px;display:flex;gap:16px;flex-wrap:wrap}
+.meta{color:var(--mut);font-size:13px;margin-bottom:18px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .hero-photo{position:relative;overflow:hidden;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.25);cursor:zoom-in}
 .hero-photo img{width:100%;height:480px;object-fit:cover;animation:kb 14s ease-in-out infinite alternate}
 @keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(2%,-2%)}}
 .hero-photo figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#eee;font-size:13px;padding:26px 16px 12px}
 .age{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;border:2px solid #fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
 .article p{margin:0 0 14px;line-height:1.7;font-size:16px}
+.strip{overflow:hidden;margin:18px 0;border-radius:12px}
+.strip-track{display:flex;gap:10px;width:max-content;animation:tick 25s linear infinite}
+.strip img{width:160px;height:100px;object-fit:cover;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:26px 0}
 .stat{background:var(--card);border-radius:12px;padding:18px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid var(--red)}
 .stat .num{font-size:34px;font-weight:900;color:var(--red)}
 .stat .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
 .sechead{font-size:22px;font-weight:900;border-left:6px solid var(--red);padding-left:12px;margin:26px 0 16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{background:#fff;border:2px solid #e2ddd2;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;transform:scale(1.05)}
 .timeline{margin:10px 0 26px;padding-left:26px;border-left:3px solid var(--red)}
 .tl{position:relative;padding:0 0 18px 14px}
 .tl::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px #ffd7dc}
 .tl .time{font-weight:900;color:var(--red)}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0 26px}
-.gallery figure{border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.15);cursor:zoom-in;position:relative;transition:transform .25s;background:#000}
-.gallery figure:hover{transform:translateY(-6px) rotate(-1deg)}
-.gallery img{height:180px;width:100%;object-fit:cover}
-.f-sepia img{filter:sepia(.9)}
-.f-bw img{filter:grayscale(1) contrast(1.3)}
-.f-hue img{filter:hue-rotate(120deg) saturate(1.6)}
-.f-pop img{filter:saturate(3) contrast(1.2)}
-.f-zoom img{transform:scale(1.7)}
-.f-dark img{filter:brightness(.7) contrast(1.4) saturate(1.4)}
-.gallery figcaption{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.72);color:#fff;font-size:11px;padding:6px 8px}
 blockquote{background:var(--dark);color:#fff;border-radius:12px;padding:22px 26px 22px 44px;font-size:20px;font-style:italic;margin:20px 0;position:relative}
 blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolute;top:6px;left:12px;opacity:.6}
 .share{display:flex;gap:10px;align-items:center;margin:18px 0;flex-wrap:wrap}
@@ -78,7 +75,7 @@ blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolut
 .poll-opt:hover{background:#ffe3e8}
 .poll-bar{background:#f1ede4;border-radius:8px;overflow:hidden;margin-bottom:6px}
 .poll-bar .fill{height:30px;background:linear-gradient(90deg,var(--red),#ff7b00);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;border-radius:8px;transition:width 1s ease}
-.readlist a{display:block;padding:9px 0;border-bottom:1px dashed #ccc;color:var(--ink);text-decoration:none;font-size:14px}
+.readlist a{display:block;padding:9px 0;border-bottom:1px dashed #ccc;color:var(--ink);text-decoration:none;font-size:14px;cursor:pointer}
 .readlist a:hover{color:var(--red)}
 .ad{background:linear-gradient(135deg,#ff7b00,var(--red));color:#fff;border-radius:12px;padding:20px;text-align:center;position:relative;overflow:hidden;margin-bottom:18px}
 .ad::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:rgba(255,255,255,.35);transform:skewX(-20deg);animation:shine 2.6s infinite}
@@ -86,12 +83,17 @@ blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolut
 .ad .big{font-size:26px;font-weight:900}
 .more{max-width:1200px;margin:10px auto 30px;padding:0 16px}
 .more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.mcard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.1);text-decoration:none;color:var(--ink);transition:transform .25s;position:relative}
-.mcard:hover{transform:translateY(-6px)}
+.mcard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.1);color:var(--ink);transition:transform .25s,box-shadow .25s;position:relative;cursor:pointer}
+.mcard:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(217,4,41,.3)}
 .mcard img{height:150px;width:100%;object-fit:cover}
 .mcard .mt{padding:12px 14px;font-weight:700;font-size:14px}
+.msub{font-weight:400;font-size:12px;color:#6b6b6b;margin-top:4px}
+.mmeta{font-weight:400;font-size:11px;color:#999;margin-top:6px}
 .cbadge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:3px;z-index:2}
 .cdel{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;z-index:2}
+.editbtn{position:absolute;top:8px;right:40px;background:var(--red);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;z-index:2}
+.ttag{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:3px;margin:0 4px 4px 0;letter-spacing:1px}
+.ttag.alt{background:var(--dark)}
 .comments{max-width:1200px;margin:0 auto 40px;padding:0 16px}
 .comment{display:flex;gap:12px;background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.07)}
 .ava{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
@@ -112,15 +114,23 @@ footer b{color:#fff}
 @keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:3000;padding:16px}
 .modal-box{background:#fff;border-radius:14px;max-width:520px;width:100%;padding:24px;position:relative;max-height:90vh;overflow-y:auto}
-.modal-close{position:absolute;top:10px;right:14px;cursor:pointer;font-size:18px;color:var(--mut)}
+.modal-box.wide{max-width:780px}
+.modal-close{position:absolute;top:10px;right:14px;cursor:pointer;font-size:18px;color:var(--mut);z-index:5}
 .modal-box h3{margin-bottom:12px;font-size:20px}
-.modal-box input,.modal-box textarea{width:100%;border:2px solid #ddd;border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:10px;font-family:inherit}
-.modal-box textarea{min-height:70px;resize:vertical}
-.modal-box input:focus,.modal-box textarea:focus{outline:none;border-color:var(--red)}
+.modal-box input,.modal-box textarea,.modal-box select{width:100%;border:2px solid #ddd;border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:10px;font-family:inherit;background:#fff}
+.modal-box textarea{min-height:110px;resize:vertical}
+.modal-box input:focus,.modal-box textarea:focus,.modal-box select:focus{outline:none;border-color:var(--red)}
+.tagrow{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;font-size:13px;font-weight:600}
+.tagrow label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .btn-red{background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-weight:800;cursor:pointer;font-size:14px}
+.btn-ghost{background:#eee;color:#333;border:none;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer;font-size:13px;margin-left:8px}
 .muted{color:var(--mut);font-size:13px;margin-bottom:12px}
 .merr{color:var(--red);font-size:13px;margin:6px 0;min-height:16px}
 .mok{color:#1a7f37;font-size:13px;margin-top:8px;min-height:16px}
+.rphoto{margin:0 0 12px;border-radius:10px;overflow:hidden}
+.rphoto img{width:100%;max-height:420px;object-fit:cover}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:12px 22px;border-radius:30px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .3s;z-index:4000;max-width:90vw;text-align:center}
+#toast.show{opacity:1}
 @media(max-width:760px){
  .site-head{gap:10px;padding:10px 12px}
  .logo{font-size:22px}
@@ -136,11 +146,10 @@ footer b{color:#fff}
  .layout{margin:16px auto;gap:16px}
  .breaking-label{padding:10px 12px;font-size:12px;letter-spacing:1px}
  .tgroup{gap:24px;font-size:13px}
+ .strip img{width:120px;height:80px}
 }
 @media(max-width:420px){
  .hero-photo img{height:230px}
- .gallery{grid-template-columns:1fr 1fr;gap:8px}
- .gallery img{height:120px}
  .stat .num{font-size:26px}
  .more-grid{grid-template-columns:1fr}
 }
@@ -158,7 +167,7 @@ footer b{color:#fff}
 <header class="site-head">
   <div class="logo"><span class="flame">🔥</span> ОГОНЬ<b>·24</b></div>
   <nav>
-    <a href="#">Главное</a><a href="#">Происшествия</a><a href="#">Сосиски</a><a href="#">Общество</a><a href="#">Культура</a>
+    <a data-sec="main">Главное</a><a data-sec="inc">Происшествия</a><a data-sec="saus">Сосиски</a><a data-sec="soc">Общество</a><a data-sec="cul">Культура</a>
   </nav>
   <div class="head-right">
     <button id="corrBtn" class="corr-btn">🎤 Корреспондент</button>
@@ -168,30 +177,25 @@ footer b{color:#fff}
 
 <div class="breaking">
   <span class="breaking-label">СРОЧНО</span>
-  <div class="ticker"><div class="ticker-track">
-    <span class="tgroup"><span>Саня раздарил 247 сосисок у Вечного огня</span>★<span>Очевидцы: «Это было красиво»</span>★<span>Синоптики: местами сосиски</span>★<span>Курс сосиски стабилен: 1 сосиска = 1 сосиска</span>★<span>Пятницу предложено объявить Днём Сосиски</span>★</span>
-    <span class="tgroup"><span>Саня раздарил 247 сосисок у Вечного огня</span>★<span>Очевидцы: «Это было красиво»</span>★<span>Синоптики: местами сосиски</span>★<span>Курс сосиски стабилен: 1 сосиска = 1 сосиска</span>★<span>Пятницу предложено объявить Днём Сосиски</span>★</span>
-  </div></div>
+  <div class="ticker"><div class="ticker-track" id="tickerTrack"></div></div>
 </div>
 
 <main class="layout">
   <article>
-    <div class="tags"><span>ПРОИСШЕСТВИЯ</span><span class="alt">ЭКСКЛЮЗИВ</span><span class="alt">РЕПОРТАЖ</span></div>
-    <h1>«Люди были голодные»: Саня раздарил сосиски у Вечного огня и стал героем города</h1>
-    <p class="lead">Корреспонденты ОГОНЬ·24 восстановили картину событий, которые уже называют «самой тёплой историей года». Человек с пакетом сосисок вышел к Вечному огню — и город никогда не будет прежним.</p>
-    <div class="meta"><span>✍️ Редакция ОГОНЬ·24</span><span>👁 <span id="views">0</span></span><span>💬 3 комментария</span><span>📍 Вечный огонь</span></div>
+    <div class="tags" id="heroTags"></div>
+    <h1 id="heroTitle"></h1>
+    <p class="lead" id="heroLead"></p>
+    <div class="meta"><span>✍️ Редакция ОГОНЬ·24</span><span>👁 <span id="views">0</span></span><span>📍 Вечный огонь</span><button id="editHero" class="btn-ghost" style="display:none">✏️ Редактировать</button></div>
 
     <figure class="hero-photo">
-      <img class="zoomable" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt="Саня — человек, подаривший сосиски">
+      <img id="heroImg" class="zoomable" src="" alt="Фото новости">
       <span class="age">0+</span>
-      <figcaption>Эксклюзивное фото: Саня в момент исторической раздачи сосисок. Фото: очевидцы</figcaption>
+      <figcaption id="heroCap">Эксклюзивное фото. Фото: очевидцы</figcaption>
     </figure>
 
-    <div class="article" style="margin-top:20px">
-      <p>История, которую ещё вчера обсуждали только в дворовых чатах, сегодня вышла на федеральный уровень. Всё началось с того, что у Вечного огня появился человек с большим полосатым пакетом. Внутри, как выяснилось, были сосиски. Много сосисок.</p>
-      <p>«Я увидел, что люди вокруг какие-то грустные и голодные. Ну и подумал: а почему бы не подарить им сосиски?» — рассказал Саня корреспонденту ОГОНЬ·24, аккуратно поправляя пакет.</p>
-      <p>За полчаса раздачи, по подсчётам редакции, было подарено 247 сосисок. Очевидцы аплодировали, голуби кружили в небе, а кто-то даже прослезился. Специалисты отмечают: ещё никто и никогда не дарил сосиски с таким размахом.</p>
-    </div>
+    <div class="strip"><div class="strip-track" id="stripTrack"></div></div>
+
+    <div class="article" id="heroText" style="margin-top:10px"></div>
 
     <div class="stats">
       <div class="stat"><div class="num" data-target="247"></div><div class="lbl">сосисок роздано</div></div>
@@ -209,16 +213,6 @@ footer b{color:#fff}
       <div class="tl"><span class="time">14:45</span> — Город обсуждает произошедшее. Мы — тоже.</div>
     </div>
 
-    <h2 class="sechead">ФОТОРЕПОРТАЖ</h2>
-    <div class="gallery">
-      <figure class="f-sepia"><img class="zoomable" loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><figcaption>Саня задумчиво смотрит вдаль</figcaption></figure>
-      <figure class="f-zoom"><img class="zoomable" loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><figcaption>Момент передачи сосиски</figcaption></figure>
-      <figure class="f-bw"><img class="zoomable" loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><figcaption>Архивное фото героя</figcaption></figure>
-      <figure class="f-hue"><img class="zoomable" loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><figcaption>Саня в неоновом свете славы</figcaption></figure>
-      <figure class="f-pop"><img class="zoomable" loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><figcaption>Цвет настроения — сосисочный</figcaption></figure>
-      <figure class="f-dark"><img class="zoomable" loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><figcaption>Герой дня крупным планом</figcaption></figure>
-    </div>
-
     <blockquote>Сосиска — это не просто еда. Это жест.»<br><small style="color:#bbb">— Саня, в эксклюзивном интервью ОГОНЬ·24</small></blockquote>
 
     <div class="share">
@@ -226,8 +220,7 @@ footer b{color:#fff}
       <button title="Телеграм">📨</button><button title="ВК">💬</button><button title="Сосиской">🌭</button>
     </div>
   </article>
-
-  <aside>
+ <aside>
     <div class="widget">
       <h3>Опрос дня</h3>
       <div id="pollBox"></div>
@@ -235,11 +228,11 @@ footer b{color:#fff}
     <div class="widget">
       <h3>Сейчас читают</h3>
       <div class="readlist">
-        <a href="#">Учёные доказали: сосиски повышают настроение на 87%</a>
-        <a href="#">Вечный огонь горит: фоторепортаж без сосисок</a>
-        <a href="#">Топ-10 пакетов для сосисок — №4 удивит всех</a>
-        <a href="#">Кот съел сосиску Сани и стал знаменитостью</a>
-        <a href="#">Голуби прокомментировали раздачу: «Мы рядом»</a>
+        <a data-id="n5">Учёные доказали: сосиски повышают настроение на 87%</a>
+        <a data-id="n7">Вечный огонь горит: фоторепортаж без сосисок</a>
+        <a data-id="n6">Топ-10 пакетов для сосисок — №4 удивит всех</a>
+        <a data-id="n8">Кот съел сосиску Сани и стал знаменитостью</a>
+        <a data-id="n4">Голуби прокомментировали раздачу: «Мы рядом»</a>
       </div>
     </div>
     <div class="ad">
@@ -256,18 +249,10 @@ footer b{color:#fff}
   </aside>
 </main>
 
-<section class="more" id="customSection" style="display:none">
-  <h2 class="sechead">🗞 ЛЕНТА КОРРЕСПОНДЕНТА</h2>
-  <div class="more-grid" id="customGrid"></div>
-</section>
-
-<section class="more">
-  <h2 class="sechead">ДРУГИЕ НОВОСТИ</h2>
-  <div class="more-grid">
-    <a class="mcard f-sepia" href="#"><img loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><div class="mt">Кто такой Саня? Большое расследование ОГОНЬ·24</div></a>
-    <a class="mcard f-bw" href="#"><img loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><div class="mt">Пакет, который изменил всё: история полосатого героя</div></a>
-    <a class="mcard f-hue" href="#"><img loading="lazy" src="https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png" alt=""><div class="mt">«Хочу как Саня»: город охватила мода на доброту</div></a>
-  </div>
+<section class="more" id="feedSec">
+  <h2 class="sechead" id="feedTitle">ЛЕНТА НОВОСТЕЙ</h2>
+  <div class="chips" id="chips"></div>
+  <div class="more-grid" id="feedGrid"></div>
 </section>
 
 <section class="comments">
@@ -290,6 +275,7 @@ footer b{color:#fff}
 </footer>
 
 <button id="rainBtn">🌭 СОСИСОЧНЫЙ ДОЖДЬ</button>
+<div id="toast"></div>
 <div id="lightbox"><img id="lbImg" src="" alt=""></div>
 
 <div id="corrModal" class="modal">
@@ -303,14 +289,33 @@ footer b{color:#fff}
       <button id="corrSubmit" class="btn-red">Войти в редакцию</button>
     </div>
     <div id="corrEditor" style="display:none">
-      <h3>📝 Создать новость</h3>
-      <input id="nTitle" placeholder="Заголовок* (обязательно)" maxlength="120">
-      <input id="nLead" placeholder="Короткое описание" maxlength="200">
-      <textarea id="nText" placeholder="Текст новости (необязательно)"></textarea>
-      <textarea id="nPhotos" placeholder="Ссылки на фото — по одной в строке (необязательно)"></textarea>
+      <h3 id="edHead">📝 Создать новость</h3>
+      <input id="nTitle" placeholder="Заголовок* (обязательно)" maxlength="150">
+      <input id="nLead" placeholder="Короткое описание (лид)" maxlength="250">
+      <textarea id="nText" placeholder="Текст новости. Пустая строка = новый абзац. Пиши хоть поэму!"></textarea>
+      <textarea id="nPhotos" placeholder="Ссылки на фото — по одной в строке" style="min-height:50px"></textarea>
+      <div class="tagrow" id="tagRow">
+        <label><input type="checkbox" value="ЭКСКЛЮЗИВ">Эксклюзив</label>
+        <label><input type="checkbox" value="РЕПОРТАЖ">Репортаж</label>
+        <label><input type="checkbox" value="СРОЧНО">Срочно</label>
+        <label><input type="checkbox" value="ИНТЕРВЬЮ">Интервью</label>
+      </div>
+      <select id="nSec">
+        <option value="inc">Раздел: Происшествия</option>
+        <option value="saus">Раздел: Сосиски</option>
+        <option value="soc">Раздел: Общество</option>
+        <option value="cul">Раздел: Культура</option>
+      </select>
       <button id="nPublish" class="btn-red">🚀 Опубликовать</button>
       <div class="mok" id="nDone"></div>
     </div>
+  </div>
+</div>
+
+<div id="reader" class="modal">
+  <div class="modal-box wide">
+    <span class="modal-close" id="readerClose">✕</span>
+    <div id="readerBody"></div>
   </div>
 </div>
 
@@ -318,9 +323,46 @@ footer b{color:#fff}
 (function(){
   var FALLBACK='https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png';
   var PASS='sanya2026';
+  var SECS={inc:'Происшествия',saus:'Сосиски',soc:'Общество',cul:'Культура'};
+  var DEFAULTS=[
+    {id:'sanya',hero:1,sec:'inc',tags:['ЭКСКЛЮЗИВ','РЕПОРТАЖ'],t:'«Люди были голодные»: Саня раздарил сосиски у Вечного огня и стал героем города',lead:'Корреспонденты ОГОНЬ·24 восстановили картину событий, которые уже называют «самой тёплой историей года».',text:'История, которую ещё вчера обсуждали только в дворовых чатах, сегодня вышла на федеральный уровень. Всё началось с того, что у Вечного огня появился человек с большим полосатым пакетом. Внутри, как выяснилось, были сосиски. Много сосисок.\n\n«Я увидел, что люди вокруг какие-то грустные и голодные. Ну и подумал: а почему бы не подарить им сосиски?» — рассказал Саня корреспонденту ОГОНЬ·24, аккуратно поправляя пакет.\n\nЗа полчаса раздачи, по подсчётам редакции, было подарено 247 сосисок. Очевидцы аплодировали, голуби кружили в небе, а кто-то даже прослезился. Специалисты отмечают: ещё никто и никогда не дарил сосиски с таким размахом.',photos:[FALLBACK],time:'17 августа, 14:45'},
+    {id:'n1',sec:'inc',tags:['ЭКСКЛЮЗИВ'],t:'Кто такой Саня? Большое расследование ОГОНЬ·24',lead:'Мы собрали всё, что известно о человеке с полосатым пакетом.',text:'Редакция ОГОНЬ·24 потратила три дня на то, чтобы восстановить маршрут Сани в исторический день.\n\nИзвестно достоверно: пакет был полосатый, сосиски — докторские, настроение — праздничное. Остальное покрыто сосисочной тайной.',photos:[FALLBACK],time:'17 августа, 16:00'},
+    {id:'n2',sec:'soc',tags:['РЕПОРТАЖ'],t:'Пакет, который изменил всё: история полосатого героя',lead:'Как обычный пакет стал символом доброты.',text:'Свидетели вспоминают: пакет появился из-за угла внезапно и сразу стал центром внимания.\n\nСтилисты уже предрекают моду на полоску в осеннем сезоне.',photos:[FALLBACK],time:'17 августа, 17:20'},
+    {id:'n3',sec:'cul',tags:['СРОЧНО'],t:'«Хочу как Саня»: город охватила мода на доброту',lead:'Люди дарят сосиски, пирожки и даже зонтики.',text:'Доброта стала вирусной: сначала сосиски, потом пирожки у остановки, а вчера кто-то подарил зонтик в ясную погоду.\n\nАдминистрация города пообещала поддержать инициативу и учредить День Сосиски.',photos:[FALLBACK],time:'18 августа, 09:12'},
+    {id:'n4',sec:'saus',tags:['ИНТЕРВЬЮ'],t:'Голуби прокомментировали раздачу: «Мы рядом»',lead:'Эксклюзивное интервью с самыми наблюдательными свидетелями.',text:'«Мы кружили рядом, но всё было мирно», — заявили голуби в эксклюзивном интервью.\n\nРедакция ОГОНЬ·24 благодарит голубей за оперативность и напоминает: сосиски птицам противопоказаны.',photos:[FALLBACK],time:'17 августа, 15:40'},
+    {id:'n5',sec:'soc',tags:[],t:'Учёные доказали: сосиски повышают настроение на 87%',lead:'Сенсация в мире науки.',text:'В эксперименте приняли участие 100 добровольцев. Контрольная группа получала брокколи.\n\nРезультаты превзошли ожидания: настроение выросло на 87%, а желание дарить — на все 100%.',photos:[FALLBACK],time:'18 августа, 10:05'},
+    {id:'n6',sec:'cul',tags:[],t:'Топ-10 пакетов для сосисок — №4 удивит всех',lead:'Подборка от редакции.',text:'От классического полосатого до дизайнерского крафтового — мы отобрали лучшие.\n\nПобедитель рейтинга, разумеется, пакет Сани. Вне конкуренции.',photos:[FALLBACK],time:'18 августа, 11:30'},
+    {id:'n7',sec:'inc',tags:['РЕПОРТАЖ'],t:'Вечный огонь горит: фоторепортаж без сосисок',lead:'Корреспонденты ОГОНЬ·24 убедились: огонь по-прежнему горит.',text:'Наш фотокорреспондент провёл у огня целый час и сделал 47 кадров.\n\nСпойлер: огонь горит. Подробности в полной версии материала.',photos:[FALLBACK],time:'18 августа, 12:00'},
+    {id:'n8',sec:'cul',tags:['СРОЧНО'],t:'Кот съел сосиску Сани и стал знаменитостью',lead:'У Сани появился конкурент.',text:'Кот по кличке Батон незаметно съел сосиску, предназначавшуюся пенсионерке, и попал на камеру.\n\nТеперь у Батона 10 тысяч подписчиков и собственное ток-шоу.',photos:[FALLBACK],time:'18 августа, 13:15'}
+  ];
   function pad(n){return n<10?'0'+n:n}
   function fmt(n){return n.toLocaleString('ru-RU')}
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function nowStr(){return new Date().toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})}
+  function loadOver(){try{return JSON.parse(localStorage.getItem('ogn24_over')||'{}')}catch(e){return{}}}
+  function saveOver(o){try{localStorage.setItem('ogn24_over',JSON.stringify(o))}catch(e){}}
+  function loadCustom(){try{return JSON.parse(localStorage.getItem('ogn24_news')||'[]')}catch(e){return[]}}
+  function saveCustom(a){try{localStorage.setItem('ogn24_news',JSON.stringify(a))}catch(e){}}
+  function isDefaultId(id){for(var i=0;i<DEFAULTS.length;i++)if(DEFAULTS[i].id===id)return true;return false}
+  function merge(a,b){var r={};for(var k in a)r[k]=a[k];for(var k2 in b)r[k2]=b[k2];return r}
+  function getAll(){
+    var over=loadOver(),cust=loadCustom(),out=[],i;
+    for(i=0;i<DEFAULTS.length;i++){var d=DEFAULTS[i];out.push(over[d.id]?merge(d,over[d.id]):d);}
+    for(i=0;i<cust.length;i++)out.push(cust[i]);
+    return out;
+  }
+  function find(id){var all=getAll();for(var i=0;i<all.length;i++)if(all[i].id===id)return all[i];return null}
+  function tagsHtml(tags){
+    if(!tags||!tags.length)return '';
+    var h='';
+    for(var i=0;i<tags.length;i++)h+='<span class="ttag'+(i%2?' alt':'')+'">'+esc(tags[i])+'</span>';
+    return h;
+  }
+  function fixImgs(root){
+    var imgs=root.querySelectorAll('img');
+    for(var k=0;k<imgs.length;k++){imgs[k].addEventListener('error',function(){this.src=FALLBACK;});}
+  }
+
   function tickClock(){
     var d=new Date();
     document.getElementById('clock').textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
@@ -355,6 +397,191 @@ footer b{color:#fff}
   }
   for(var i=0;i<nums.length;i++){anim(nums[i]);}
 
+  var toastT;
+  function toast(m){
+    var el=document.getElementById('toast');
+    el.textContent=m;el.classList.add('show');
+    clearTimeout(toastT);
+    toastT=setTimeout(function(){el.classList.remove('show')},2500);
+  }
+
+  function buildTicker(){
+    var all=getAll(),items=[];
+    for(var i=0;i<all.length&&items.length<6;i++)items.push(all[i].t);
+    var g='';
+    for(var j=0;j<items.length;j++)g+='<span>'+esc(items[j])+'</span>★';
+    document.getElementById('tickerTrack').innerHTML='<span class="tgroup">'+g+'</span><span class="tgroup">'+g+'</span>';
+  }
+  function buildStrip(){
+    var all=getAll(),ph=[];
+    for(var i=0;i<all.length;i++){var p=all[i].photos||[];for(var j=0;j<p.length;j++)if(ph.indexOf(p[j])<0)ph.push(p[j]);}
+    if(!ph.length)ph=[FALLBACK];
+    var h='';
+    for(var k=0;k<ph.length;k++)h+='<img loading="lazy" src="'+esc(ph[k])+'" alt="">';
+    document.getElementById('stripTrack').innerHTML=h+h;
+  }
+  function renderHero(){
+    var all=getAll(),h=null,i;
+    for(i=0;i<all.length;i++)if(all[i].hero){h=all[i];break;}
+    if(!h)h=DEFAULTS[0];
+    document.getElementById('heroTitle').textContent=h.t;
+    document.getElementById('heroLead').textContent=h.lead||'';
+    var th='';
+    for(i=0;i<(h.tags||[]).length;i++)th+='<span'+(i%2?' class="alt"':'')+'>'+esc(h.tags[i])+'</span>';
+    document.getElementById('heroTags').innerHTML=th||'<span>ГЛАВНОЕ</span>';
+    document.getElementById('heroImg').src=(h.photos&&h.photos.length)?h.photos[0]:FALLBACK;
+    var ps=(h.text||'').split(/\n+/),html='';
+    for(i=0;i<ps.length;i++){var s=ps[i].replace(/^\s+|\s+$/g,'');if(s)html+='<p>'+esc(s)+'</p>';}
+    document.getElementById('heroText').innerHTML=html;
+    buildStrip();
+  }
+
+  var curFilter='all';
+  function renderChips(){
+    var keys=['all','inc','saus','soc','cul'];
+    var names={all:'Все'};
+    for(var k in SECS)names[k]=SECS[k];
+    var h='';
+    for(var i=0;i<keys.length;i++){
+      h+='<button class="chip'+(curFilter===keys[i]?' on':'')+'" data-f="'+keys[i]+'">'+names[keys[i]]+'</button>';
+    }
+    var box=document.getElementById('chips');
+    box.innerHTML=h;
+    var btns=box.querySelectorAll('.chip');
+    for(var j=0;j<btns.length;j++){
+      btns[j].addEventListener('click',function(){
+        curFilter=this.getAttribute('data-f');
+        renderChips();renderFeed();
+      });
+    }
+  }
+  function card(n){
+    var img=(n.photos&&n.photos.length)?n.photos[0]:FALLBACK;
+    return '<div class="mcard" data-id="'+n.id+'">'+(n.cust?'<span class="cbadge">🎤 КОРРЕСПОНДЕНТ</span>':'')+(isCorr?'<button class="editbtn" data-e="'+n.id+'">✏️</button>':'')+(isCorr&&n.cust?'<button class="cdel" data-d="'+n.id+'">✕</button>':'')+'<img loading="lazy" src="'+esc(img)+'" alt=""><div class="mt">'+tagsHtml(n.tags)+esc(n.t)+(n.lead?'<div class="msub">'+esc(n.lead)+'</div>':'')+'<div class="mmeta">🕐 '+esc(n.time||'')+' · '+esc(SECS[n.sec]||'Главное')+'</div></div></div>';
+  }
+  function renderFeed(){
+    var all=getAll(),html='',count=0;
+    for(var i=0;i<all.length;i++){
+      var n=all[i];
+      if(n.hero)continue;
+      if(curFilter!=='all'&&n.sec!==curFilter)continue;
+      count++;html+=card(n);
+    }
+    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В этом разделе пока пусто. Корреспондент может это исправить! 🌭</div>';
+    var grid=document.getElementById('feedGrid');
+    grid.innerHTML=html;
+    document.getElementById('feedTitle').textContent=curFilter==='all'?'ЛЕНТА НОВОСТЕЙ':'ЛЕНТА · '+SECS[curFilter].toUpperCase();
+    fixImgs(grid);
+    grid.querySelectorAll('.editbtn').forEach?null:null;
+    var eds=grid.querySelectorAll('.editbtn');
+    for(var e=0;e<eds.length;e++){eds[e].addEventListener('click',function(ev){ev.stopPropagation();openEditor(this.getAttribute('data-e'));});}
+    var dels=grid.querySelectorAll('.cdel');
+    for(var d=0;d<dels.length;d++){dels[d].addEventListener('click',function(ev){ev.stopPropagation();var a=loadCustom();var id=this.getAttribute('data-d');var na=[];for(var x=0;x<a.length;x++)if(a[x].id!==id)na.push(a[x]);saveCustom(na);renderAll();toast('🗑 Новость удалена');});}
+    var cards=grid.querySelectorAll('.mcard');
+    for(var c=0;c<cards.length;c++){cards[c].addEventListener('click',function(){openReader(this.getAttribute('data-id'));});}
+  }
+
+  var reader=document.getElementById('reader');
+  function openReader(id){
+    var n=find(id);if(!n)return;
+    var i,html='<div>'+tagsHtml(n.tags)+'</div><h2 style="margin:10px 0;font-size:26px;line-height:1.2">'+esc(n.t)+'</h2><div class="mmeta" style="margin-bottom:14px;font-size:12px">🕐 '+esc(n.time||'')+' · '+esc(SECS[n.sec]||'Главное')+' · 👁 '+fmt(1000+Math.floor(Math.random()*9000))+'</div>';
+    if(n.lead)html+='<p class="lead">'+esc(n.lead)+'</p>';
+    var phs=n.photos||[];
+    for(i=0;i<phs.length;i++)html+='<figure class="rphoto"><img src="'+esc(phs[i])+'" alt=""></figure>';
+    var ps=(n.text||'').split(/\n+/);
+    for(i=0;i<ps.length;i++){var s=ps[i].replace(/^\s+|\s+$/g,'');if(s)html+='<p style="margin:0 0 12px;line-height:1.7">'+esc(s)+'</p>';}
+    if(isCorr)html+='<button class="btn-ghost" onclick="void(0)" id="rEdit">✏️ Редактировать</button>';
+    var rb=document.getElementById('readerBody');
+    rb.innerHTML=html;
+    fixImgs(rb);
+    if(isCorr){var be=document.getElementById('rEdit');if(be)be.addEventListener('click',function(){reader.style.display='none';openEditor(id);});}
+    reader.style.display='flex';
+  }
+  document.getElementById('readerClose').addEventListener('click',function(){reader.style.display='none';});
+  reader.addEventListener('click',function(e){if(e.target===reader)reader.style.display='none';});
+
+  var isCorr=false,editingId=null;
+  var modal=document.getElementById('corrModal');
+  var nTitle=document.getElementById('nTitle'),nLead=document.getElementById('nLead'),nText=document.getElementById('nText'),nPhotos=document.getElementById('nPhotos'),nSec=document.getElementById('nSec'),nDone=document.getElementById('nDone'),tagRow=document.getElementById('tagRow');
+  document.getElementById('corrBtn').addEventListener('click',function(){
+    modal.style.display='flex';
+    if(isCorr)openEditor(null);
+  });
+  document.getElementById('corrClose').addEventListener('click',function(){modal.style.display='none';});
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.style.display='none';});
+  function tryLogin(){
+    var v=document.getElementById('corrPass').value;
+    if(v===PASS){
+      isCorr=true;
+      document.getElementById('editHero').style.display='inline-block';
+      renderFeed();
+      openEditor(null);
+      toast('🎤 Добро пожаловать в редакцию!');
+    }else{
+      document.getElementById('corrErr').textContent='Неверный пароль. Сосиска обижена.';
+    }
+  }
+  document.getElementById('corrSubmit').addEventListener('click',tryLogin);
+  document.getElementById('corrPass').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
+  function openEditor(id){
+    editingId=id||null;
+    var n=id?find(id):null;
+    document.getElementById('edHead').textContent=n?'✏️ Редактировать новость':'📝 Создать новость';
+    nTitle.value=n?n.t:'';
+    nLead.value=n?(n.lead||''):'';
+    nText.value=n?(n.text||''):'';
+    nPhotos.value=n?(n.photos||[]).join('\n'):'';
+    nSec.value=n?(n.sec||'inc'):'inc';
+    var cbs=tagRow.querySelectorAll('input');
+    for(var i=0;i<cbs.length;i++){cbs[i].checked=!!(n&&n.tags&&n.tags.indexOf(cbs[i].value)>=0);}
+    nDone.textContent='';
+    document.getElementById('corrLogin').style.display='none';
+    document.getElementById('corrEditor').style.display='block';
+    modal.style.display='flex';
+  }
+  document.getElementById('editHero').addEventListener('click',function(){openEditor('sanya');});
+  document.getElementById('nPublish').addEventListener('click',function(){
+    var t=nTitle.value.trim();
+    if(!t){nDone.textContent='⚠️ Заголовок обязателен!';return;}
+    var tags=[];
+    var cbs=tagRow.querySelectorAll('input:checked');
+    for(var i=0;i<cbs.length;i++)tags.push(cbs[i].value);
+    var item={id:editingId||('c'+Date.now()),t:t,lead:nLead.value.trim(),text:nText.value.trim(),photos:nPhotos.value.split('\n').map(function(s){return s.trim()}).filter(Boolean),tags:tags,sec:nSec.value,time:nowStr(),cust:1,hero:0};
+    if(editingId&&isDefaultId(editingId)){
+      item.cust=0;item.hero=editingId==='sanya'?1:0;
+      var over=loadOver();over[editingId]=item;saveOver(over);
+    }else if(editingId){
+      var arr=loadCustom(),found=false;
+      for(var j=0;j<arr.length;j++){if(arr[j].id===editingId){item.cust=1;item.hero=arr[j].hero||0;arr[j]=item;found=true;break;}}
+      if(!found)arr.unshift(item);
+      saveCustom(arr);
+    }else{
+      var a2=loadCustom();a2.unshift(item);saveCustom(a2);
+    }
+    nTitle.value='';nLead.value='';nText.value='';nPhotos.value='';
+    var cbs2=tagRow.querySelectorAll('input');
+    for(var k=0;k<cbs2.length;k++)cbs2[k].checked=false;
+    modal.style.display='none';
+    renderAll();
+    toast('✅ Опубликовано!');
+    burst();
+  });
+
+  function renderAll(){renderHero();buildTicker();renderChips();renderFeed();}
+
+  var navLinks=document.querySelectorAll('nav a');
+  for(var nl=0;nl<navLinks.length;nl++){
+    navLinks[nl].addEventListener('click',function(e){
+      e.preventDefault();
+      var s=this.getAttribute('data-sec');
+      if(s==='main'){window.scrollTo({top:0,behavior:'smooth'});return;}
+      curFilter=s;renderChips();renderFeed();
+      document.getElementById('feedSec').scrollIntoView({behavior:'smooth'});
+    });
+  }
+  var rl=document.querySelectorAll('.readlist a');
+  for(var r=0;r<rl.length;r++){rl[r].addEventListener('click',function(){openReader(this.getAttribute('data-id'));});}
+
   var poll=[{l:'Герой года! 🏆',v:5421},{l:'Просто поделился 🤝',v:2318},{l:'Хочу сосиску 🌭',v:4107}];
   var voted=false,box=document.getElementById('pollBox');
   function renderPoll(){
@@ -367,7 +594,7 @@ footer b{color:#fff}
     html+='<div style="font-size:12px;color:#6b6b6b">Всего голосов: '+fmt(total)+' · Спасибо!</div>';
     box.innerHTML=html;
   }
-  function renderButtons(){
+  function renderPollButtons(){
     var html='';
     for(var i=0;i<poll.length;i++){html+='<button type="button" class="poll-opt" data-i="'+i+'">'+poll[i].l+'</button>';}
     box.innerHTML=html;
@@ -380,7 +607,7 @@ footer b{color:#fff}
       });
     }
   }
-  renderButtons();
+  renderPollButtons();
 
   var clist=document.getElementById('clist');
   document.getElementById('cform').addEventListener('submit',function(e){
@@ -397,90 +624,24 @@ footer b{color:#fff}
   });
 
   var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
-  var zs=document.querySelectorAll('img.zoomable');
-  for(var z=0;z<zs.length;z++){
-    zs[z].addEventListener('click',function(){lbImg.src=this.src;lb.style.display='flex';});
-  }
+  document.getElementById('heroImg').addEventListener('click',function(){lbImg.src=this.src;lb.style.display='flex';});
   lb.addEventListener('click',function(){lb.style.display='none';});
 
+  var EMO=['🌭','🎉',''];
   function drop(){
     var el=document.createElement('span');
     el.className='drop';
-    el.textContent=Math.random()<0.85?'🌭':'🔥';
+    el.textContent=EMO[Math.floor(Math.random()*EMO.length)];
     el.style.left=(Math.random()*100)+'vw';
     el.style.fontSize=(16+Math.random()*30)+'px';
     el.style.animationDuration=(2.2+Math.random()*2.5)+'s';
     document.body.appendChild(el);
     el.addEventListener('animationend',function(){el.remove();});
   }
-  document.getElementById('rainBtn').addEventListener('click',function(){
-    for(var i=0;i<60;i++){setTimeout(drop,i*40);}
-  });
+  function burst(){for(var i=0;i<50;i++){setTimeout(drop,i*35);}}
+  document.getElementById('rainBtn').addEventListener('click',burst);
 
-  var isCorr=false;
-  var modal=document.getElementById('corrModal');
-  document.getElementById('corrBtn').addEventListener('click',function(){
-    modal.style.display='flex';
-    if(isCorr)showEditor();
-  });
-  document.getElementById('corrClose').addEventListener('click',function(){modal.style.display='none';});
-  modal.addEventListener('click',function(e){if(e.target===modal)modal.style.display='none';});
-  function tryLogin(){
-    var v=document.getElementById('corrPass').value;
-    if(v===PASS){isCorr=true;showEditor();}
-    else{document.getElementById('corrErr').textContent='Неверный пароль. Сосиска обижена.';}
-  }
-  document.getElementById('corrSubmit').addEventListener('click',tryLogin);
-  document.getElementById('corrPass').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
-  function showEditor(){
-    document.getElementById('corrLogin').style.display='none';
-    document.getElementById('corrEditor').style.display='block';
-    renderCustom();
-  }
-  function loadNews(){try{return JSON.parse(localStorage.getItem('ogn24_news')||'[]')}catch(e){return[]}}
-  function saveNews(a){try{localStorage.setItem('ogn24_news',JSON.stringify(a))}catch(e){}}
-  document.getElementById('nPublish').addEventListener('click',function(){
-    var t=document.getElementById('nTitle').value.trim();
-    var done=document.getElementById('nDone');
-    if(!t){done.textContent='⚠️ Заголовок обязателен!';return;}
-    var lead=document.getElementById('nLead').value.trim();
-    var text=document.getElementById('nText').value.trim();
-    var photos=document.getElementById('nPhotos').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
-    var arr=loadNews();
-    arr.unshift({t:t,lead:lead,text:text,photos:photos,time:new Date().toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})});
-    saveNews(arr);
-    document.getElementById('nTitle').value='';
-    document.getElementById('nLead').value='';
-    document.getElementById('nText').value='';
-    document.getElementById('nPhotos').value='';
-    done.textContent='✅ Опубликовано! Новость в ленте корреспондента.';
-    renderCustom();
-  });
-  function renderCustom(){
-    var arr=loadNews();
-    var sec=document.getElementById('customSection');
-    var grid=document.getElementById('customGrid');
-    if(!arr.length){sec.style.display='none';return;}
-    sec.style.display='block';
-    var html='';
-    for(var i=0;i<arr.length;i++){
-      var n=arr[i];
-      var img=(n.photos&&n.photos.length)?n.photos[0]:FALLBACK;
-      html+='<div class="mcard"><span class="cbadge">🎤 КОРРЕСПОНДЕНТ</span>'+(isCorr?'<button class="cdel" data-i="'+i+'">✕</button>':'')+'<img loading="lazy" src="'+esc(img)+'" alt=""><div class="mt">'+esc(n.t)+(n.lead?'<div style="font-weight:400;font-size:12px;color:#6b6b6b;margin-top:4px">'+esc(n.lead)+'</div>':'')+(n.text?'<div style="font-weight:400;font-size:12px;color:#444;margin-top:6px">'+esc(n.text)+'</div>':'')+'<div style="font-weight:400;font-size:11px;color:#999;margin-top:6px">🕐 '+esc(n.time||'')+'</div></div></div>';
-    }
-    grid.innerHTML=html;
-    var imgs=grid.querySelectorAll('img');
-    for(var k=0;k<imgs.length;k++){imgs[k].addEventListener('error',function(){this.src=FALLBACK;});}
-    var dels=grid.querySelectorAll('.cdel');
-    for(var j=0;j<dels.length;j++){
-      dels[j].addEventListener('click',function(){
-        var a=loadNews();
-        a.splice(parseInt(this.getAttribute('data-i'),10),1);
-        saveNews(a);renderCustom();
-      });
-    }
-  }
-  renderCustom();
+  renderAll();
 })();
 </script>
 </body>
