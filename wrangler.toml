@@ -1,6 +1,0 @@
-name = "sanya-sausage-news"
-main = "index.js"
-compatibility_date = "2026-01-01"
-
-# Указываем Pages директорию статики (пустую — воркер сам отдаёт HTML)
-assets = { directory = "./public" }
