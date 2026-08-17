@@ -11,18 +11,21 @@ export default {
 :root{--red:#d90429;--red2:#ef233c;--dark:#101014;--paper:#f4f1ea;--ink:#181818;--card:#fff;--mut:#6b6b6b}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Rubik',system-ui,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+body{font-family:'Rubik',system-ui,Arial,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
 img{max-width:100%;display:block}
 #pbar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--red),#ff7b00);width:0;z-index:1001}
 .topbar{background:var(--dark);color:#cfcfd6;font-size:12px;display:flex;justify-content:space-between;gap:12px;padding:6px 16px;flex-wrap:wrap}
-.site-head{background:#fff;display:flex;align-items:center;gap:24px;padding:14px 24px;box-shadow:0 2px 12px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000}
+.site-head{background:#fff;display:flex;align-items:center;gap:16px;padding:14px 24px;box-shadow:0 2px 12px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000;flex-wrap:wrap}
 .logo{font-size:28px;font-weight:900;letter-spacing:1px;white-space:nowrap}
 .logo b{color:var(--red)}
 .flame{display:inline-block;animation:flick 1s infinite alternate}
 @keyframes flick{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
 nav{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto}
-nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.5px;padding:6px 2px;border-bottom:3px solid transparent}
+nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.5px;padding:6px 2px;border-bottom:3px solid transparent;white-space:nowrap}
 nav a:hover{border-color:var(--red);color:var(--red)}
+.head-right{display:flex;gap:8px;align-items:center}
+.corr-btn{background:var(--dark);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
+.corr-btn:hover{background:var(--red)}
 .live{background:var(--red);color:#fff;font-weight:700;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
 .live .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 1s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
@@ -37,8 +40,8 @@ nav a:hover{border-color:var(--red);color:var(--red)}
 @media(max-width:900px){.layout{grid-template-columns:1fr}}
 .tags span{background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;letter-spacing:1px;margin-right:6px}
 .tags span.alt{background:var(--dark)}
-h1{font-size:clamp(26px,4vw,44px);line-height:1.15;margin:14px 0 12px;font-weight:900}
-.lead{font-size:18px;color:#333;line-height:1.6;border-left:4px solid var(--red);padding-left:14px;margin-bottom:14px}
+h1{font-size:clamp(24px,4vw,44px);line-height:1.15;margin:14px 0 12px;font-weight:900;word-wrap:break-word}
+.lead{font-size:17px;color:#333;line-height:1.6;border-left:4px solid var(--red);padding-left:14px;margin-bottom:14px}
 .meta{color:var(--mut);font-size:13px;margin-bottom:18px;display:flex;gap:16px;flex-wrap:wrap}
 .hero-photo{position:relative;overflow:hidden;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.25);cursor:zoom-in}
 .hero-photo img{width:100%;height:480px;object-fit:cover;animation:kb 14s ease-in-out infinite alternate}
@@ -46,7 +49,7 @@ h1{font-size:clamp(26px,4vw,44px);line-height:1.15;margin:14px 0 12px;font-weigh
 .hero-photo figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#eee;font-size:13px;padding:26px 16px 12px}
 .age{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;border:2px solid #fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
 .article p{margin:0 0 14px;line-height:1.7;font-size:16px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:26px 0}
 .stat{background:var(--card);border-radius:12px;padding:18px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid var(--red)}
 .stat .num{font-size:34px;font-weight:900;color:var(--red)}
 .stat .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
@@ -68,7 +71,7 @@ h1{font-size:clamp(26px,4vw,44px);line-height:1.15;margin:14px 0 12px;font-weigh
 .gallery figcaption{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.72);color:#fff;font-size:11px;padding:6px 8px}
 blockquote{background:var(--dark);color:#fff;border-radius:12px;padding:22px 26px 22px 44px;font-size:20px;font-style:italic;margin:20px 0;position:relative}
 blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolute;top:6px;left:12px;opacity:.6}
-.share{display:flex;gap:10px;align-items:center;margin:18px 0}
+.share{display:flex;gap:10px;align-items:center;margin:18px 0;flex-wrap:wrap}
 .share button{width:46px;height:46px;border-radius:50%;border:none;font-size:20px;cursor:pointer;transition:transform .2s;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.15)}
 .share button:hover{transform:scale(1.2) rotate(8deg)}
 .widget{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px}
@@ -85,28 +88,64 @@ blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolut
 .ad .big{font-size:26px;font-weight:900}
 .more{max-width:1200px;margin:10px auto 30px;padding:0 16px}
 .more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.mcard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.1);text-decoration:none;color:var(--ink);transition:transform .25s}
+.mcard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.1);text-decoration:none;color:var(--ink);transition:transform .25s;position:relative}
 .mcard:hover{transform:translateY(-6px)}
 .mcard img{height:150px;width:100%;object-fit:cover}
 .mcard .mt{padding:12px 14px;font-weight:700;font-size:14px}
+.cbadge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:3px;z-index:2}
+.cdel{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;z-index:2}
 .comments{max-width:1200px;margin:0 auto 40px;padding:0 16px}
 .comment{display:flex;gap:12px;background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.07)}
 .ava{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .cname{font-weight:700;font-size:14px}
 .ctime{color:var(--mut);font-size:12px;font-weight:400}
-.ctext{font-size:14px;margin-top:4px}
+.ctext{font-size:14px;margin-top:4px;word-wrap:break-word}
 .cform{display:flex;gap:10px;margin-top:14px}
-.cform input{flex:1;border:2px solid #ddd;border-radius:10px;padding:12px;font-size:14px;font-family:inherit}
+.cform input{flex:1;min-width:0;border:2px solid #ddd;border-radius:10px;padding:12px;font-size:14px;font-family:inherit}
 .cform input:focus{outline:none;border-color:var(--red)}
 .cform button{background:var(--red);color:#fff;border:none;border-radius:10px;padding:0 20px;font-weight:700;cursor:pointer}
 footer{background:var(--dark);color:#9a9aa3;padding:30px 16px;text-align:center;font-size:13px;margin-top:40px}
 footer b{color:#fff}
-#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:2000;cursor:zoom-out}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:2000;cursor:zoom-out;padding:12px}
 #lightbox img{max-width:92vw;max-height:92vh;border:6px solid #fff;border-radius:8px;box-shadow:0 0 60px rgba(255,0,60,.5)}
 #rainBtn{position:fixed;right:18px;bottom:18px;z-index:1500;background:var(--red);color:#fff;border:none;border-radius:30px;padding:14px 22px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(217,4,41,.5);animation:bob 2s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-6px)}}
 .drop{position:fixed;top:-60px;z-index:1400;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:3000;padding:16px}
+.modal-box{background:#fff;border-radius:14px;max-width:520px;width:100%;padding:24px;position:relative;max-height:90vh;overflow-y:auto}
+.modal-close{position:absolute;top:10px;right:14px;cursor:pointer;font-size:18px;color:var(--mut)}
+.modal-box h3{margin-bottom:12px;font-size:20px}
+.modal-box input,.modal-box textarea{width:100%;border:2px solid #ddd;border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:10px;font-family:inherit}
+.modal-box textarea{min-height:70px;resize:vertical}
+.modal-box input:focus,.modal-box textarea:focus{outline:none;border-color:var(--red)}
+.btn-red{background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-weight:800;cursor:pointer;font-size:14px}
+.muted{color:var(--mut);font-size:13px;margin-bottom:12px}
+.merr{color:var(--red);font-size:13px;margin:6px 0;min-height:16px}
+.mok{color:#1a7f37;font-size:13px;margin-top:8px;min-height:16px}
+@media(max-width:760px){
+ .site-head{gap:10px;padding:10px 12px}
+ .logo{font-size:22px}
+ nav{order:3;width:100%;margin-left:0;flex-wrap:nowrap;overflow-x:auto;gap:14px;padding-bottom:4px;scrollbar-width:none}
+ .hero-photo img{height:300px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .cform{flex-wrap:wrap}
+ .cform button{width:100%;padding:12px}
+ #rainBtn{right:10px;bottom:10px;padding:12px 16px;font-size:13px}
+ .topbar{font-size:10px;gap:6px}
+ blockquote{font-size:16px;padding:18px 18px 18px 34px}
+ blockquote::before{font-size:48px}
+ .layout{margin:16px auto;gap:16px}
+ .breaking-label{padding:10px 12px;font-size:12px;letter-spacing:1px}
+ .tgroup{gap:24px;font-size:13px}
+}
+@media(max-width:420px){
+ .hero-photo img{height:230px}
+ .gallery{grid-template-columns:1fr 1fr;gap:8px}
+ .gallery img{height:120px}
+ .stat .num{font-size:26px}
+ .more-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -123,7 +162,10 @@ footer b{color:#fff}
   <nav>
     <a href="#">Главное</a><a href="#">Происшествия</a><a href="#">Сосиски</a><a href="#">Общество</a><a href="#">Культура</a>
   </nav>
-  <div class="live"><span class="dot"></span>LIVE</div>
+  <div class="head-right">
+    <button id="corrBtn" class="corr-btn">🎤 Корреспондент</button>
+    <div class="live"><span class="dot"></span>LIVE</div>
+  </div>
 </header>
 
 <div class="breaking">
@@ -216,6 +258,11 @@ footer b{color:#fff}
   </aside>
 </main>
 
+<section class="more" id="customSection" style="display:none">
+  <h2 class="sechead">🗞 ЛЕНТА КОРРЕСПОНДЕНТА</h2>
+  <div class="more-grid" id="customGrid"></div>
+</section>
+
 <section class="more">
   <h2 class="sechead">ДРУГИЕ НОВОСТИ</h2>
   <div class="more-grid">
@@ -241,16 +288,41 @@ footer b{color:#fff}
 <footer>
   <p><b>🔥 ОГОНЬ·24</b> · Сетевое издание «Сосиски у огня» · 0+</p>
   <p>Это пародийный новостной сайт. Все совпадения случайны, сосиски — нет.</p>
-  <p>© 2026 Редакция ОГОНЬ·24. При использовании сосисок ссылка обязательна.</p>
+  <p>🎤 Вход для корреспондентов — по паролю. © 2026 Редакция ОГОНЬ·24</p>
 </footer>
 
 <button id="rainBtn">🌭 СОСИСОЧНЫЙ ДОЖДЬ</button>
 <div id="lightbox"><img id="lbImg" src="" alt=""></div>
 
+<div id="corrModal" class="modal">
+  <div class="modal-box">
+    <span class="modal-close" id="corrClose">✕</span>
+    <div id="corrLogin">
+      <h3>🎤 Вход для корреспондентов</h3>
+      <p class="muted">Доступ только по паролю. Спроси у главреда или посмотри под обёрткой сосиски.</p>
+      <input id="corrPass" type="password" placeholder="Пароль корреспондента">
+      <div class="merr" id="corrErr"></div>
+      <button id="corrSubmit" class="btn-red">Войти в редакцию</button>
+    </div>
+    <div id="corrEditor" style="display:none">
+      <h3>📝 Создать новость</h3>
+      <input id="nTitle" placeholder="Заголовок* (обязательно)" maxlength="120">
+      <input id="nLead" placeholder="Короткое описание" maxlength="200">
+      <textarea id="nText" placeholder="Текст новости (необязательно)"></textarea>
+      <textarea id="nPhotos" placeholder="Ссылки на фото — по одной в строку (необязательно)"></textarea>
+      <button id="nPublish" class="btn-red">🚀 Опубликовать</button>
+      <div class="mok" id="nDone"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
+  var FALLBACK='https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png';
+  var PASS='sanya2026';
   function pad(n){return n<10?'0'+n:n}
   function fmt(n){return n.toLocaleString('ru-RU')}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   function tickClock(){
     var d=new Date();
     document.getElementById('clock').textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
@@ -336,7 +408,7 @@ footer b{color:#fff}
   function drop(){
     var el=document.createElement('span');
     el.className='drop';
-    el.textContent=Math.random()<0.85?'🌭':'🔥';
+    el.textContent=Math.random()<0.85?'🌭':'';
     el.style.left=(Math.random()*100)+'vw';
     el.style.fontSize=(16+Math.random()*30)+'px';
     el.style.animationDuration=(2.2+Math.random()*2.5)+'s';
@@ -346,6 +418,71 @@ footer b{color:#fff}
   document.getElementById('rainBtn').addEventListener('click',function(){
     for(var i=0;i<60;i++){setTimeout(drop,i*40);}
   });
+
+  var isCorr=false;
+  var modal=document.getElementById('corrModal');
+  document.getElementById('corrBtn').addEventListener('click',function(){
+    modal.style.display='flex';
+    if(isCorr)showEditor();
+  });
+  document.getElementById('corrClose').addEventListener('click',function(){modal.style.display='none';});
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.style.display='none';});
+  function tryLogin(){
+    var v=document.getElementById('corrPass').value;
+    if(v===PASS){isCorr=true;showEditor();}
+    else{document.getElementById('corrErr').textContent='Неверный пароль. Сосиска обижена.';}
+  }
+  document.getElementById('corrSubmit').addEventListener('click',tryLogin);
+  document.getElementById('corrPass').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
+  function showEditor(){
+    document.getElementById('corrLogin').style.display='none';
+    document.getElementById('corrEditor').style.display='block';
+    renderCustom();
+  }
+  function loadNews(){try{return JSON.parse(localStorage.getItem('ogn24_news')||'[]')}catch(e){return[]}}
+  function saveNews(a){try{localStorage.setItem('ogn24_news',JSON.stringify(a))}catch(e){}}
+  document.getElementById('nPublish').addEventListener('click',function(){
+    var t=document.getElementById('nTitle').value.trim();
+    var done=document.getElementById('nDone');
+    if(!t){done.textContent='⚠️ Заголовок обязателен!';return;}
+    var lead=document.getElementById('nLead').value.trim();
+    var text=document.getElementById('nText').value.trim();
+    var photos=document.getElementById('nPhotos').value.split('\\n').map(function(s){return s.trim()}).filter(Boolean);
+    var arr=loadNews();
+    arr.unshift({t:t,lead:lead,text:text,photos:photos,time:new Date().toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})});
+    saveNews(arr);
+    document.getElementById('nTitle').value='';
+    document.getElementById('nLead').value='';
+    document.getElementById('nText').value='';
+    document.getElementById('nPhotos').value='';
+    done.textContent='✅ Опубликовано! Новость в ленте корреспондента.';
+    renderCustom();
+  });
+  function renderCustom(){
+    var arr=loadNews();
+    var sec=document.getElementById('customSection');
+    var grid=document.getElementById('customGrid');
+    if(!arr.length){sec.style.display='none';return;}
+    sec.style.display='block';
+    var html='';
+    for(var i=0;i<arr.length;i++){
+      var n=arr[i];
+      var img=(n.photos&&n.photos.length)?n.photos[0]:FALLBACK;
+      html+='<div class="mcard"><span class="cbadge">🎤 КОРРЕСПОНДЕНТ</span>'+(isCorr?'<button class="cdel" data-i="'+i+'">✕</button>':'')+'<img loading="lazy" src="'+esc(img)+'" alt=""><div class="mt">'+esc(n.t)+(n.lead?'<div style="font-weight:400;font-size:12px;color:#6b6b6b;margin-top:4px">'+esc(n.lead)+'</div>':'')+(n.text?'<div style="font-weight:400;font-size:12px;color:#444;margin-top:6px">'+esc(n.text)+'</div>':'')+'<div style="font-weight:400;font-size:11px;color:#999;margin-top:6px">🕐 '+esc(n.time||'')+'</div></div></div>';
+    }
+    grid.innerHTML=html;
+    var imgs=grid.querySelectorAll('img');
+    for(var k=0;k<imgs.length;k++){imgs[k].addEventListener('error',function(){this.src=FALLBACK;});}
+    var dels=grid.querySelectorAll('.cdel');
+    for(var j=0;j<dels.length;j++){
+      dels[j].addEventListener('click',function(){
+        var a=loadNews();
+        a.splice(parseInt(this.getAttribute('data-i'),10),1);
+        saveNews(a);renderCustom();
+      });
+    }
+  }
+  renderCustom();
 })();
 </script>
 </body>
