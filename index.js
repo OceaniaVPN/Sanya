@@ -1,6 +1,5 @@
-export default {
-  async fetch(request, env, ctx) {
-    const html = `<!DOCTYPE html>
+export async function onRequest(context) {
+  const html = `<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -309,7 +308,7 @@ footer b{color:#fff}
       <input id="nTitle" placeholder="Заголовок* (обязательно)" maxlength="120">
       <input id="nLead" placeholder="Короткое описание" maxlength="200">
       <textarea id="nText" placeholder="Текст новости (необязательно)"></textarea>
-      <textarea id="nPhotos" placeholder="Ссылки на фото — по одной в строку (необязательно)"></textarea>
+      <textarea id="nPhotos" placeholder="Ссылки на фото — по одной в строке (необязательно)"></textarea>
       <button id="nPublish" class="btn-red">🚀 Опубликовать</button>
       <div class="mok" id="nDone"></div>
     </div>
@@ -488,11 +487,10 @@ footer b{color:#fff}
 </body>
 </html>`;
 
-    return new Response(html, {
-      headers: {
-        'content-type': 'text/html;charset=UTF-8',
-        'cache-control': 'no-cache',
-      },
-    });
-  },
-};
+  return new Response(html, {
+    headers: {
+      'content-type': 'text/html;charset=UTF-8',
+      'cache-control': 'no-cache',
+    },
+  });
+}
