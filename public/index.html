@@ -94,6 +94,11 @@ blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolut
 .editbtn{position:absolute;top:8px;right:40px;background:var(--red);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;z-index:2}
 .ttag{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:3px;margin:0 4px 4px 0;letter-spacing:1px}
 .ttag.alt{background:var(--dark)}
+.page{max-width:900px;margin:24px auto;padding:0 16px}
+.backbtn{display:inline-block;margin:0 0 16px;background:#fff;border:2px solid #e2ddd2;border-radius:20px;padding:8px 16px;font-weight:700;font-size:13px;color:var(--ink);text-decoration:none;transition:all .2s}
+.backbtn:hover{border-color:var(--red);color:var(--red)}
+.rphoto{margin:0 0 12px;border-radius:10px;overflow:hidden}
+.rphoto img{width:100%;max-height:480px;object-fit:cover;cursor:zoom-in}
 .comments{max-width:1200px;margin:0 auto 40px;padding:0 16px}
 .comment{display:flex;gap:12px;background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.07)}
 .ava{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
@@ -114,7 +119,6 @@ footer b{color:#fff}
 @keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:3000;padding:16px}
 .modal-box{background:#fff;border-radius:14px;max-width:520px;width:100%;padding:24px;position:relative;max-height:90vh;overflow-y:auto}
-.modal-box.wide{max-width:780px}
 .modal-close{position:absolute;top:10px;right:14px;cursor:pointer;font-size:18px;color:var(--mut);z-index:5}
 .modal-box h3{margin-bottom:12px;font-size:20px}
 .modal-box input,.modal-box textarea,.modal-box select{width:100%;border:2px solid #ddd;border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:10px;font-family:inherit;background:#fff}
@@ -127,8 +131,6 @@ footer b{color:#fff}
 .muted{color:var(--mut);font-size:13px;margin-bottom:12px}
 .merr{color:var(--red);font-size:13px;margin:6px 0;min-height:16px}
 .mok{color:#1a7f37;font-size:13px;margin-top:8px;min-height:16px}
-.rphoto{margin:0 0 12px;border-radius:10px;overflow:hidden}
-.rphoto img{width:100%;max-height:420px;object-fit:cover}
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:12px 22px;border-radius:30px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .3s;z-index:4000;max-width:90vw;text-align:center}
 #toast.show{opacity:1}
 @media(max-width:760px){
@@ -167,7 +169,7 @@ footer b{color:#fff}
 <header class="site-head">
   <div class="logo"><span class="flame">🔥</span> ОГОНЬ<b>·24</b></div>
   <nav>
-    <a data-sec="main">Главное</a><a data-sec="inc">Происшествия</a><a data-sec="saus">Сосиски</a><a data-sec="soc">Общество</a><a data-sec="cul">Культура</a>
+    <a href="#/">Главное</a><a href="#/sec/inc">Происшествия</a><a href="#/sec/saus">Сосиски</a><a href="#/sec/soc">Общество</a><a href="#/sec/cul">Культура</a>
   </nav>
   <div class="head-right">
     <button id="corrBtn" class="corr-btn">🎤 Корреспондент</button>
@@ -180,6 +182,7 @@ footer b{color:#fff}
   <div class="ticker"><div class="ticker-track" id="tickerTrack"></div></div>
 </div>
 
+<div id="viewHome">
 <main class="layout">
   <article>
     <div class="tags" id="heroTags"></div>
@@ -188,9 +191,9 @@ footer b{color:#fff}
     <div class="meta"><span>✍️ Редакция ОГОНЬ·24</span><span>👁 <span id="views">0</span></span><span>📍 Вечный огонь</span><button id="editHero" class="btn-ghost" style="display:none">✏️ Редактировать</button></div>
 
     <figure class="hero-photo">
-      <img id="heroImg" class="zoomable" src="" alt="Фото новости">
+      <img id="heroImg" src="" alt="Фото новости">
       <span class="age">0+</span>
-      <figcaption id="heroCap">Эксклюзивное фото. Фото: очевидцы</figcaption>
+      <figcaption>Эксклюзивное фото. Фото: очевидцы</figcaption>
     </figure>
 
     <div class="strip"><div class="strip-track" id="stripTrack"></div></div>
@@ -217,7 +220,7 @@ footer b{color:#fff}
 
     <div class="share">
       <span style="font-weight:700">Поделиться:</span>
-      <button title="Телеграм">📨</button><button title="ВК">💬</button><button title="Сосиской">🌭</button>
+      <button>📨</button><button>💬</button><button>🌭</button>
     </div>
   </article>
  <aside>
@@ -228,11 +231,11 @@ footer b{color:#fff}
     <div class="widget">
       <h3>Сейчас читают</h3>
       <div class="readlist">
-        <a data-id="n5">Учёные доказали: сосиски повышают настроение на 87%</a>
-        <a data-id="n7">Вечный огонь горит: фоторепортаж без сосисок</a>
-        <a data-id="n6">Топ-10 пакетов для сосисок — №4 удивит всех</a>
-        <a data-id="n8">Кот съел сосиску Сани и стал знаменитостью</a>
-        <a data-id="n4">Голуби прокомментировали раздачу: «Мы рядом»</a>
+        <a href="#/news/n5">Учёные доказали: сосиски повышают настроение на 87%</a>
+        <a href="#/news/n7">Вечный огонь горит: фоторепортаж без сосисок</a>
+        <a href="#/news/n6">Топ-10 пакетов для сосисок — №4 удивит всех</a>
+        <a href="#/news/n8">Кот съел сосиску Сани и стал знаменитостью</a>
+        <a href="#/news/n4">Голуби прокомментировали раздачу: «Мы рядом»</a>
       </div>
     </div>
     <div class="ad">
@@ -267,6 +270,20 @@ footer b{color:#fff}
     <button type="submit">Отправить</button>
   </form>
 </section>
+</div>
+
+<div id="viewSec" style="display:none">
+  <section class="more">
+    <h2 class="sechead" id="secTitle"></h2>
+    <div class="more-grid" id="secGrid"></div>
+  </section>
+</div>
+
+<div id="viewArticle" style="display:none">
+  <section class="page">
+    <div id="artBody"></div>
+  </section>
+</div>
 
 <footer>
   <p><b>🔥 ОГОНЬ·24</b> · Сетевое издание «Сосиски у огня» · 0+</p>
@@ -309,13 +326,6 @@ footer b{color:#fff}
       <button id="nPublish" class="btn-red">🚀 Опубликовать</button>
       <div class="mok" id="nDone"></div>
     </div>
-  </div>
-</div>
-
-<div id="reader" class="modal">
-  <div class="modal-box wide">
-    <span class="modal-close" id="readerClose">✕</span>
-    <div id="readerBody"></div>
   </div>
 </div>
 
@@ -405,6 +415,10 @@ footer b{color:#fff}
     toastT=setTimeout(function(){el.classList.remove('show')},2500);
   }
 
+  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+  lb.addEventListener('click',function(){lb.style.display='none';});
+  document.getElementById('heroImg').addEventListener('click',function(){lbImg.src=this.src;lb.style.display='flex';});
+
   function buildTicker(){
     var all=getAll(),items=[];
     for(var i=0;i<all.length&&items.length<6;i++)items.push(all[i].t);
@@ -442,22 +456,26 @@ footer b{color:#fff}
     var names={all:'Все'};
     for(var k in SECS)names[k]=SECS[k];
     var h='';
-    for(var i=0;i<keys.length;i++){
-      h+='<button class="chip'+(curFilter===keys[i]?' on':'')+'" data-f="'+keys[i]+'">'+names[keys[i]]+'</button>';
-    }
+    for(var i=0;i<keys.length;i++){h+='<button class="chip'+(curFilter===keys[i]?' on':'')+'" data-f="'+keys[i]+'">'+names[keys[i]]+'</button>';}
     var box=document.getElementById('chips');
     box.innerHTML=h;
     var btns=box.querySelectorAll('.chip');
     for(var j=0;j<btns.length;j++){
-      btns[j].addEventListener('click',function(){
-        curFilter=this.getAttribute('data-f');
-        renderChips();renderFeed();
-      });
+      btns[j].addEventListener('click',function(){curFilter=this.getAttribute('data-f');renderChips();renderFeed();});
     }
   }
   function card(n){
     var img=(n.photos&&n.photos.length)?n.photos[0]:FALLBACK;
     return '<div class="mcard" data-id="'+n.id+'">'+(n.cust?'<span class="cbadge">🎤 КОРРЕСПОНДЕНТ</span>':'')+(isCorr?'<button class="editbtn" data-e="'+n.id+'">✏️</button>':'')+(isCorr&&n.cust?'<button class="cdel" data-d="'+n.id+'">✕</button>':'')+'<img loading="lazy" src="'+esc(img)+'" alt=""><div class="mt">'+tagsHtml(n.tags)+esc(n.t)+(n.lead?'<div class="msub">'+esc(n.lead)+'</div>':'')+'<div class="mmeta">🕐 '+esc(n.time||'')+' · '+esc(SECS[n.sec]||'Главное')+'</div></div></div>';
+  }
+  function bindGrid(grid){
+    fixImgs(grid);
+    var eds=grid.querySelectorAll('.editbtn');
+    for(var e=0;e<eds.length;e++){eds[e].addEventListener('click',function(ev){ev.stopPropagation();openEditor(this.getAttribute('data-e'));});}
+    var dels=grid.querySelectorAll('.cdel');
+    for(var d=0;d<dels.length;d++){dels[d].addEventListener('click',function(ev){ev.stopPropagation();var id=this.getAttribute('data-d');var a=loadCustom();var na=[];for(var x=0;x<a.length;x++)if(a[x].id!==id)na.push(a[x]);saveCustom(na);renderAll();route();toast('🗑 Новость удалена');});}
+    var cards=grid.querySelectorAll('.mcard');
+    for(var c=0;c<cards.length;c++){cards[c].addEventListener('click',function(){location.hash='#/news/'+this.getAttribute('data-id');});}
   }
   function renderFeed(){
     var all=getAll(),html='',count=0;
@@ -471,34 +489,62 @@ footer b{color:#fff}
     var grid=document.getElementById('feedGrid');
     grid.innerHTML=html;
     document.getElementById('feedTitle').textContent=curFilter==='all'?'ЛЕНТА НОВОСТЕЙ':'ЛЕНТА · '+SECS[curFilter].toUpperCase();
-    fixImgs(grid);
-    grid.querySelectorAll('.editbtn').forEach?null:null;
-    var eds=grid.querySelectorAll('.editbtn');
-    for(var e=0;e<eds.length;e++){eds[e].addEventListener('click',function(ev){ev.stopPropagation();openEditor(this.getAttribute('data-e'));});}
-    var dels=grid.querySelectorAll('.cdel');
-    for(var d=0;d<dels.length;d++){dels[d].addEventListener('click',function(ev){ev.stopPropagation();var a=loadCustom();var id=this.getAttribute('data-d');var na=[];for(var x=0;x<a.length;x++)if(a[x].id!==id)na.push(a[x]);saveCustom(na);renderAll();toast('🗑 Новость удалена');});}
-    var cards=grid.querySelectorAll('.mcard');
-    for(var c=0;c<cards.length;c++){cards[c].addEventListener('click',function(){openReader(this.getAttribute('data-id'));});}
+    bindGrid(grid);
   }
 
-  var reader=document.getElementById('reader');
-  function openReader(id){
-    var n=find(id);if(!n)return;
-    var i,html='<div>'+tagsHtml(n.tags)+'</div><h2 style="margin:10px 0;font-size:26px;line-height:1.2">'+esc(n.t)+'</h2><div class="mmeta" style="margin-bottom:14px;font-size:12px">🕐 '+esc(n.time||'')+' · '+esc(SECS[n.sec]||'Главное')+' · 👁 '+fmt(1000+Math.floor(Math.random()*9000))+'</div>';
+  function showHome(){
+    document.getElementById('viewHome').style.display='block';
+    document.getElementById('viewSec').style.display='none';
+    document.getElementById('viewArticle').style.display='none';
+  }
+  function showSec(s){
+    if(!SECS[s]){showHome();return;}
+    document.getElementById('viewHome').style.display='none';
+    document.getElementById('viewArticle').style.display='none';
+    document.getElementById('viewSec').style.display='block';
+    document.getElementById('secTitle').textContent='РАЗДЕЛ · '+SECS[s].toUpperCase();
+    var all=getAll(),html='',count=0;
+    for(var i=0;i<all.length;i++){if(all[i].sec===s){count++;html+=card(all[i]);}}
+    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В разделе пока пусто. Самое время для сенсации! 🌭</div>';
+    var grid=document.getElementById('secGrid');
+    grid.innerHTML=html;
+    bindGrid(grid);
+    window.scrollTo({top:0});
+  }
+  function showArticle(id){
+    var n=find(id);
+    if(!n){showHome();return;}
+    document.getElementById('viewHome').style.display='none';
+    document.getElementById('viewSec').style.display='none';
+    document.getElementById('viewArticle').style.display='block';
+    var i,html='<a class="backbtn" href="#/">← На главную</a>';
+    html+='<div>'+tagsHtml(n.tags)+'</div>';
+    html+='<h1>'+esc(n.t)+'</h1>';
+    html+='<div class="meta"><span>✍️ ОГОНЬ·24</span><span>🕐 '+esc(n.time||'')+'</span><span>📂 '+esc(SECS[n.sec]||'Главное')+'</span><span>👁 '+fmt(1000+Math.floor(Math.random()*9000))+'</span></div>';
     if(n.lead)html+='<p class="lead">'+esc(n.lead)+'</p>';
-    var phs=n.photos||[];
+    var phs=(n.photos&&n.photos.length)?n.photos:[FALLBACK];
     for(i=0;i<phs.length;i++)html+='<figure class="rphoto"><img src="'+esc(phs[i])+'" alt=""></figure>';
     var ps=(n.text||'').split(/\n+/);
-    for(i=0;i<ps.length;i++){var s=ps[i].replace(/^\s+|\s+$/g,'');if(s)html+='<p style="margin:0 0 12px;line-height:1.7">'+esc(s)+'</p>';}
-    if(isCorr)html+='<button class="btn-ghost" onclick="void(0)" id="rEdit">✏️ Редактировать</button>';
-    var rb=document.getElementById('readerBody');
-    rb.innerHTML=html;
-    fixImgs(rb);
-    if(isCorr){var be=document.getElementById('rEdit');if(be)be.addEventListener('click',function(){reader.style.display='none';openEditor(id);});}
-    reader.style.display='flex';
+    for(i=0;i<ps.length;i++){var s=ps[i].replace(/^\s+|\s+$/g,'');if(s)html+='<p style="margin:0 0 14px;line-height:1.75;font-size:17px">'+esc(s)+'</p>';}
+    html+='<div class="share"><span style="font-weight:700">Поделиться:</span><button>📨</button><button>💬</button><button>🌭</button></div>';
+    if(isCorr)html+='<button class="btn-ghost" id="artEdit">✏️ Редактировать эту новость</button>';
+    var body=document.getElementById('artBody');
+    body.innerHTML=html;
+    fixImgs(body);
+    var z=body.querySelectorAll('img');
+    for(var k=0;k<z.length;k++){z[k].addEventListener('click',function(){lbImg.src=this.src;lb.style.display='flex';});}
+    if(isCorr){var be=document.getElementById('artEdit');if(be)be.addEventListener('click',function(){openEditor(id);});}
+    window.scrollTo({top:0});
   }
-  document.getElementById('readerClose').addEventListener('click',function(){reader.style.display='none';});
-  reader.addEventListener('click',function(e){if(e.target===reader)reader.style.display='none';});
+  function route(){
+    var h=location.hash||'#/';
+    var m=h.match(/^#\/sec\/(\w+)/);
+    var m2=h.match(/^#\/news\/(.+)$/);
+    if(m){showSec(m[1]);}
+    else if(m2){showArticle(decodeURIComponent(m2[1]));}
+    else{showHome();}
+  }
+  window.addEventListener('hashchange',route);
 
   var isCorr=false,editingId=null;
   var modal=document.getElementById('corrModal');
@@ -514,7 +560,7 @@ footer b{color:#fff}
     if(v===PASS){
       isCorr=true;
       document.getElementById('editHero').style.display='inline-block';
-      renderFeed();
+      renderAll();route();
       openEditor(null);
       toast('🎤 Добро пожаловать в редакцию!');
     }else{
@@ -562,25 +608,12 @@ footer b{color:#fff}
     var cbs2=tagRow.querySelectorAll('input');
     for(var k=0;k<cbs2.length;k++)cbs2[k].checked=false;
     modal.style.display='none';
-    renderAll();
+    renderAll();route();
     toast('✅ Опубликовано!');
     burst();
   });
 
   function renderAll(){renderHero();buildTicker();renderChips();renderFeed();}
-
-  var navLinks=document.querySelectorAll('nav a');
-  for(var nl=0;nl<navLinks.length;nl++){
-    navLinks[nl].addEventListener('click',function(e){
-      e.preventDefault();
-      var s=this.getAttribute('data-sec');
-      if(s==='main'){window.scrollTo({top:0,behavior:'smooth'});return;}
-      curFilter=s;renderChips();renderFeed();
-      document.getElementById('feedSec').scrollIntoView({behavior:'smooth'});
-    });
-  }
-  var rl=document.querySelectorAll('.readlist a');
-  for(var r=0;r<rl.length;r++){rl[r].addEventListener('click',function(){openReader(this.getAttribute('data-id'));});}
 
   var poll=[{l:'Герой года! 🏆',v:5421},{l:'Просто поделился 🤝',v:2318},{l:'Хочу сосиску 🌭',v:4107}];
   var voted=false,box=document.getElementById('pollBox');
@@ -623,10 +656,6 @@ footer b{color:#fff}
     inp.value='';
   });
 
-  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
-  document.getElementById('heroImg').addEventListener('click',function(){lbImg.src=this.src;lb.style.display='flex';});
-  lb.addEventListener('click',function(){lb.style.display='none';});
-
   var EMO=['🌭','🎉',''];
   function drop(){
     var el=document.createElement('span');
@@ -642,6 +671,7 @@ footer b{color:#fff}
   document.getElementById('rainBtn').addEventListener('click',burst);
 
   renderAll();
+  route();
 })();
 </script>
 </body>
