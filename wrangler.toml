@@ -6,4 +6,4 @@ assets = { directory = "./public" }
 [[d1_databases]]
 binding = "DB"
 database_name = "ogn24"
-database_id = "ВСТАВЬ_СЮДА_ID_ИЗ_ДАШБОРДА"
+database_id = "5c3c44b9-84a1-4547-8f57-8e01feb69b35"
