@@ -77,7 +77,7 @@ blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolut
 .poll-bar .fill{height:30px;background:linear-gradient(90deg,var(--red),#ff7b00);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;border-radius:8px;transition:width 1s ease}
 .readlist a{display:block;padding:9px 0;border-bottom:1px dashed #ccc;color:var(--ink);text-decoration:none;font-size:14px;cursor:pointer}
 .readlist a:hover{color:var(--red)}
-.ad{background:linear-gradient(135deg,#ff7b00,var(--red));color:#fff;border-radius:12px;padding:20px;text-align:center;position:relative;overflow:hidden;margin-bottom:18px}
+.ad{background:linear-gradient(135deg,#0f9b0f,#0b6b0b);color:#fff;border-radius:12px;padding:20px;text-align:center;position:relative;overflow:hidden;margin-bottom:18px}
 .ad::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:rgba(255,255,255,.35);transform:skewX(-20deg);animation:shine 2.6s infinite}
 @keyframes shine{to{left:130%}}
 .ad .big{font-size:26px;font-weight:900}
@@ -169,7 +169,7 @@ footer b{color:#fff}
 <header class="site-head">
   <div class="logo"><span class="flame">🔥</span> ОГОНЬ<b>·24</b></div>
   <nav>
-    <a href="#/">Главное</a><a href="#/sec/inc">Происшествия</a><a href="#/sec/saus">Сосиски</a><a href="#/sec/soc">Общество</a><a href="#/sec/cul">Культура</a>
+    <a href="#/">Главное</a><a href="#/sec/inc">Происшествия</a><a href="#/sec/saus">Котики</a><a href="#/sec/soc">Общество</a><a href="#/sec/cul">Культура</a>
   </nav>
   <div class="head-right">
     <button id="corrBtn" class="corr-btn">🎤 Корреспондент</button>
@@ -231,23 +231,23 @@ footer b{color:#fff}
     <div class="widget">
       <h3>Сейчас читают</h3>
       <div class="readlist">
-        <a href="#/news/sanya">Саня раздарил сосиски у Вечного огня — город не забудет</a>
-        <a href="#/news/n5">Учёные доказали: сосиски повышают настроение на 87%</a>
-        <a href="#/news/n6">Топ-10 пакетов для сосисок — №4 удивит всех</a>
-        <a href="#/news/n8">Кот съел сосиску Сани и стал знаменитостью</a>
-        <a href="#/news/n4">Голуби прокомментировали раздачу: «Мы рядом»</a>
+        <a href="#/news/bandit">Коричневый кот Бандит украл все новогодние игрушки</a>
+        <a href="#/news/bandit2">Бандит вернул игрушки с процентами — найден 48-й шар</a>
+        <a href="#/news/top10">Топ-10 мест, где коты прячут игрушки — №4 удивит всех</a>
+        <a href="#/news/n5">Учёные доказали: коты повышают настроение на 87%</a>
+        <a href="#/news/n7">Ёлка снова в моде: репортаж из двора</a>
       </div>
     </div>
     <div class="ad">
-      <div class="big">СОСИСКИН™</div>
-      <p>Сосиски, которые дарят. Дари как Саня!</p>
-      <p style="font-size:24px">🌭🌭</p>
+      <div class="big">ИГРУШКИН™</div>
+      <p>Вернём всё, что укатилось под диван!</p>
+      <p style="font-size:24px">🎄</p>
     </div>
     <div class="widget">
       <h3>Погода</h3>
       <div style="font-size:40px">🌤</div>
       <p style="font-weight:700">+24°C</p>
-      <p style="font-size:13px;color:var(--mut)">Местами дым из сборочных. Ветер южный.</p>
+      <p style="font-size:13px;color:var(--mut)">Местами мишура. Ветер южный.</p>
     </div>
   </aside>
 </main>
@@ -259,12 +259,8 @@ footer b{color:#fff}
 </section>
 
 <section class="comments">
-  <h2 class="sechead">КОММЕНТАРИИ (3)</h2>
-  <div id="clist">
-    <div class="comment"><div class="ava">👵</div><div><div class="cname">Мария <span class="ctime">12 минут назад</span></div><div class="ctext">Ох, бедный Егор. Держись, милый. У всех хоть раз дымилось, но не так же!</div></div></div>
-    <div class="comment"><div class="ava">🧔</div><div><div class="cname">Олег <span class="ctime">8 минут назад</span></div><div class="ctext">Кот не пострадал? Это главный вопрос.</div></div></div>
-    <div class="comment"><div class="ava">🐦</div><div><div class="cname">Голубь <span class="ctime">только что</span></div><div class="ctext">Летали рядом, видели дым. 💨</div></div></div>
-  </div>
+  <h2 class="sechead" id="cHead">КОММЕНТАРИИ</h2>
+  <div id="clist"></div>
   <form class="cform" id="cform">
     <input id="cinput" placeholder="Ваш комментарий..." maxlength="300">
     <button type="submit">Отправить</button>
@@ -286,12 +282,12 @@ footer b{color:#fff}
 </div>
 
 <footer>
-  <p><b>🔥 ОГОНЬ·24</b> · Сетевое издание «Сосиски и дым» · 0+</p>
+  <p><b>🔥 ОГОНЬ·24</b> · Сетевое издание «Дым и мишура» · 0+</p>
   <p>Это пародийный новостной сайт. Все совпадения случайны.</p>
   <p>🎤 Вход для корреспондентов — по паролю. © 2026 Редакция ОГОНЬ·24</p>
 </footer>
 
-<button id="rainBtn">🌭 СОСИСОЧНЫЙ ДОЖДЬ</button>
+<button id="rainBtn">🎄 ПРАЗДНИЧНЫЙ ДОЖДЬ</button>
 <div id="toast"></div>
 <div id="lightbox"><img id="lbImg" src="" alt=""></div>
 
@@ -319,7 +315,7 @@ footer b{color:#fff}
       </div>
       <select id="nSec">
         <option value="inc">Раздел: Происшествия</option>
-        <option value="saus">Раздел: Сосиски</option>
+        <option value="saus">Раздел: Котики</option>
         <option value="soc">Раздел: Общество</option>
         <option value="cul">Раздел: Культура</option>
       </select>
@@ -331,35 +327,35 @@ footer b{color:#fff}
 
 <script>
 (function(){
-  var FALLBACK='https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/sanya.png';
+  function svgImg(e){return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="#101014"/><text x="200" y="170" font-size="110" text-anchor="middle">'+e+'</text></svg>');}
+  var FALLBACK=svgImg('📰');
+  var CATIMG=svgImg('🐈');
+  var TREEIMG=svgImg('🎄');
   var EGORPHOTO='https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/2021-01-07%2008-45-19.JPG';
-  var PASS='sanya2026';
-  var SECS={inc:'Происшествия',saus:'Сосиски',soc:'Общество',cul:'Культура'};
+  var SECS={inc:'Происшествия',saus:'Котики',soc:'Общество',cul:'Культура'};
   var DEFAULTS=[
     {id:'egor',hero:1,sec:'inc',tags:['ЭКСКЛЮЗИВ','СРОЧНО'],t:'«Воткнул под 89°»: у Егора бабахнул ПК с новенькой RTX 5090',lead:'Эксклюзивный репортаж с места событий: всего один градус угла кабеля отделял мечту от дыма.',text:'Трагедия, потрясшая всё ПК-сообщество, произошла на этой неделе. Егор два года копил на RTX 5090 и, когда наконец установил её, решил сэкономить время: кабель питания он воткнул под углом 89 градусов вместо положенных 90.\n\n«Я думал, один градус ничего не решит», — рассказал Егор корреспонденту ОГОНЬ·24, вытирая пепел со стола.\n\nЧерез секунду после включения раздался хлопок, соседи решили, что начался салют, а кот ушёл под кровать на три часа. Карта, блок питания и часть стола утрачены. Угол 89° вошёл в историю.',photos:[EGORPHOTO],time:'19 августа, 18:20'},
-    {id:'sanya',sec:'inc',tags:['ЭКСКЛЮЗИВ','РЕПОРТАЖ'],t:'«Люди были голодные»: Саня раздарил сосиски у Вечного огня и стал героем города',lead:'Корреспонденты ОГОНЬ·24 восстановили картину событий, которые уже называют «самой тёплой историей года».',text:'История, которую ещё вчера обсуждали только в дворовых чатах, сегодня вышла на федеральный уровень. Всё началось с того, что у Вечного огня появился человек с большим полосатым пакетом. Внутри, как выяснилось, были сосиски. Много сосисок.\n\n«Я увидел, что люди вокруг какие-то грустные и голодные. Ну и подумал: а почему бы не подарить им сосиски?» — рассказал Саня корреспонденту ОГОНЬ·24, аккуратно поправляя пакет.\n\nЗа полчаса раздачи, по подсчётам редакции, было подарено 247 сосисок. Очевидцы аплодировали, голуби кружили в небе, а кто-то даже прослезился.',photos:[FALLBACK],time:'17 августа, 14:45'},
-    {id:'n1',sec:'inc',tags:['ЭКСКЛЮЗИВ'],t:'Кто такой Саня? Большое расследование ОГОНЬ·24',lead:'Мы собрали всё, что известно о человеке с полосатым пакетом.',text:'Редакция ОГОНЬ·24 потратила три дня на то, чтобы восстановить маршрут Сани в исторический день.\n\nИзвестно достоверно: пакет был полосатый, сосиски — докторские, настроение — праздничное. Остальное покрыто сосисочной тайной.',photos:[FALLBACK],time:'17 августа, 16:00'},
-    {id:'n2',sec:'soc',tags:['РЕПОРТАЖ'],t:'Пакет, который изменил всё: история полосатого героя',lead:'Как обычный пакет стал символом доброты.',text:'Свидетели вспоминают: пакет появился из-за угла внезапно и сразу стал центром внимания.\n\nСтилисты уже предрекают моду на полоску в осеннем сезоне.',photos:[FALLBACK],time:'17 августа, 17:20'},
-    {id:'n3',sec:'cul',tags:['СРОЧНО'],t:'«Хочу как Саня»: город охватила мода на доброту',lead:'Люди дарят сосиски, пирожки и даже зонтики.',text:'Доброта стала вирусной: сначала сосиски, потом пирожки у остановки, а вчера кто-то подарил зонтик в ясную погоду.\n\nАдминистрация города пообещала поддержать инициативу и учредить День Сосиски.',photos:[FALLBACK],time:'18 августа, 09:12'},
-    {id:'n4',sec:'saus',tags:['ИНТЕРВЬЮ'],t:'Голуби прокомментировали раздачу: «Мы рядом»',lead:'Эксклюзивное интервью с самыми наблюдательными свидетелями.',text:'«Мы кружили рядом, но всё было мирно», — заявили голуби в эксклюзивном интервью.\n\nРедакция ОГОНЬ·24 благодарит голубей за оперативность и напоминает: сосиски птицам противопоказаны.',photos:[FALLBACK],time:'17 августа, 15:40'},
-    {id:'n5',sec:'soc',tags:[],t:'Учёные доказали: сосиски повышают настроение на 87%',lead:'Сенсация в мире науки.',text:'В эксперименте приняли участие 100 добровольцев. Контрольная группа получала брокколи.\n\nРезультаты превзошли ожидания: настроение выросло на 87%, а желание дарить — на все 100%.',photos:[FALLBACK],time:'18 августа, 10:05'},
-    {id:'n6',sec:'cul',tags:[],t:'Топ-10 пакетов для сосисок — №4 удивит всех',lead:'Подборка от редакции.',text:'От классического полосатого до дизайнерского крафтового — мы отобрали лучшие.\n\nПобедитель рейтинга, разумеется, пакет Сани. Вне конкуренции.',photos:[FALLBACK],time:'18 августа, 11:30'},
-    {id:'n8',sec:'cul',tags:['СРОЧНО'],t:'Кот съел сосиску Сани и стал знаменитостью',lead:'У Сани появился конкурент.',text:'Кот по кличке Батон незаметно съел сосиску, предназначавшуюся пенсионерке, и попал на камеру.\n\nТеперь у Батона 10 тысяч подписчиков и собственное ток-шоу.',photos:[FALLBACK],time:'18 августа, 13:15'}
+    {id:'bandit',sec:'saus',tags:['ЭКСКЛЮЗИВ','РЕПОРТАЖ'],t:'«Пушистая банда»: коричневый кот Бандит украл все новогодние игрушки',lead:'Целую неделю в доме пропадали мишура и шары. Детектив раскрыл сам себя, уснув на добыче.',text:'Всё началось с того, что у хозяев дома стала пропадать новогодняя мишура. Сначала исчез один шар, потом гирлянда, а под конец — целый мешок игрушек, приготовленных к празднику.\n\nХозяева установили камеру и ахнули: в 23:58 в комнату крадётся коричневый кот по кличке Бандит, хватает игрушку за игрушкой и уносит их под диван.\n\nПод диваном оперативники нашли 47 шаров, три гирлянды и мишуру. Бандит спал на куче добычи и сдался без сопротивления. Игрушки возвращены на ёлку, а Бандит получил внеочередную порцию вкусняшек — по словам хозяев, «за раскаяние».',photos:[CATIMG],time:'30 декабря, 23:58'},
+    {id:'bandit2',sec:'saus',tags:['СРОЧНО'],t:'Бандит вернул игрушки с процентами: под диваном найден 48-й шар',lead:'Расследование ОГОНЬ·24 продолжается.',text:'Во время уборки оперативники обнаружили под диваном ещё один шар — сорок восьмой. Откуда он взялся, Бандит объяснить отказался.\n\nЭксперты сходятся во мнении: кот просто хотел, чтобы праздник длился дольше. Мы тоже.',photos:[CATIMG],time:'31 декабря, 12:00'},
+    {id:'top10',sec:'saus',tags:[],t:'Топ-10 мест, где коты прячут новогодние игрушки — №4 удивит всех',lead:'Подборка от редакции.',text:'От классического «под диваном» до сейфа с документами — мы отобрали лучшие тайники.\n\nПобедитель рейтинга — коробка из-под этих же игрушек. Котики любят иронию.',photos:[CATIMG],time:'31 декабря, 15:30'},
+    {id:'n5',sec:'soc',tags:[],t:'Учёные доказали: коты повышают настроение на 87%',lead:'Сенсация в мире науки.',text:'В эксперименте приняли участие 100 добровольцев. Контрольная группа сидела без котов.\n\nРезультаты превзошли ожидания: настроение выросло на 87%, а желание завести второго кота — на все 100%.',photos:[CATIMG],time:'18 августа, 10:05'},
+    {id:'n7',sec:'cul',tags:['РЕПОРТАЖ'],t:'Ёлка снова в моде: репортаж из двора, где её наряжали всем подъездом',lead:'Корреспонденты ОГОНЬ·24 убедились: праздник возвращается.',text:'Наш фотокорреспондент провёл во дворе целый час и сделал 47 кадров.\n\nСпойлер: ёлка стоит, гирлянда горит, Бандит наблюдает с подоконника.',photos:[TREEIMG],time:'18 августа, 12:00'}
   ];
+  var STATE={news:[],over:{},comments:null};
+  var PASS='';
   function pad(n){return n<10?'0'+n:n}
   function fmt(n){return n.toLocaleString('ru-RU')}
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   function nowStr(){return new Date().toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})}
-  function loadOver(){try{return JSON.parse(localStorage.getItem('ogn24_over')||'{}')}catch(e){return{}}}
-  function saveOver(o){try{localStorage.setItem('ogn24_over',JSON.stringify(o))}catch(e){}}
-  function loadCustom(){try{return JSON.parse(localStorage.getItem('ogn24_news')||'[]')}catch(e){return[]}}
-  function saveCustom(a){try{localStorage.setItem('ogn24_news',JSON.stringify(a))}catch(e){}}
+  function api(path,body){
+    return fetch(path,body?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}:undefined).then(function(r){return r.json()});
+  }
   function isDefaultId(id){for(var i=0;i<DEFAULTS.length;i++)if(DEFAULTS[i].id===id)return true;return false}
   function merge(a,b){var r={};for(var k in a)r[k]=a[k];for(var k2 in b)r[k2]=b[k2];return r}
   function getAll(){
-    var over=loadOver(),cust=loadCustom(),out=[],i;
-    for(i=0;i<DEFAULTS.length;i++){var d=DEFAULTS[i];out.push(over[d.id]?merge(d,over[d.id]):d);}
-    for(i=0;i<cust.length;i++)out.push(cust[i]);
+    var out=[],i;
+    for(i=0;i<DEFAULTS.length;i++){var d=DEFAULTS[i];out.push(STATE.over[d.id]?merge(d,STATE.over[d.id]):d);}
+    for(i=0;i<STATE.news.length;i++)out.push(STATE.news[i]);
     return out;
   }
   function find(id){var all=getAll();for(var i=0;i<all.length;i++)if(all[i].id===id)return all[i];return null}
@@ -474,7 +470,7 @@ footer b{color:#fff}
     var eds=grid.querySelectorAll('.editbtn');
     for(var e=0;e<eds.length;e++){eds[e].addEventListener('click',function(ev){ev.stopPropagation();openEditor(this.getAttribute('data-e'));});}
     var dels=grid.querySelectorAll('.cdel');
-    for(var d=0;d<dels.length;d++){dels[d].addEventListener('click',function(ev){ev.stopPropagation();var id=this.getAttribute('data-d');var a=loadCustom();var na=[];for(var x=0;x<a.length;x++)if(a[x].id!==id)na.push(a[x]);saveCustom(na);renderAll();route();toast('🗑 Новость удалена');});}
+    for(var d=0;d<dels.length;d++){dels[d].addEventListener('click',function(ev){ev.stopPropagation();var id=this.getAttribute('data-d');api('/api/save',{action:'del',id:id,pass:PASS}).then(function(r){if(r.ok){STATE.news=r.news||[];STATE.over=r.over||{};renderAll();route();toast('🗑 Новость удалена');}});});}
     var cards=grid.querySelectorAll('.mcard');
     for(var c=0;c<cards.length;c++){cards[c].addEventListener('click',function(){location.hash='#/news/'+this.getAttribute('data-id');});}
   }
@@ -486,7 +482,7 @@ footer b{color:#fff}
       if(curFilter!=='all'&&n.sec!==curFilter)continue;
       count++;html+=card(n);
     }
-    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В этом разделе пока пусто. Корреспондент может это исправить! 🌭</div>';
+    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В этом разделе пока пусто. Корреспондент может это исправить! 🐈</div>';
     var grid=document.getElementById('feedGrid');
     grid.innerHTML=html;
     document.getElementById('feedTitle').textContent=curFilter==='all'?'ЛЕНТА НОВОСТЕЙ':'ЛЕНТА · '+SECS[curFilter].toUpperCase();
@@ -506,7 +502,7 @@ footer b{color:#fff}
     document.getElementById('secTitle').textContent='РАЗДЕЛ · '+SECS[s].toUpperCase();
     var all=getAll(),html='',count=0;
     for(var i=0;i<all.length;i++){if(all[i].sec===s){count++;html+=card(all[i]);}}
-    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В разделе пока пусто. Самое время для сенсации! 🌭</div>';
+    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В разделе пока пусто. Самое время для сенсации! 🐈</div>';
     var grid=document.getElementById('secGrid');
     grid.innerHTML=html;
     bindGrid(grid);
@@ -547,6 +543,17 @@ footer b{color:#fff}
   }
   window.addEventListener('hashchange',route);
 
+  function renderComments(){
+    var arr=STATE.comments||[];
+    var html='';
+    for(var i=0;i<arr.length;i++){
+      var c=arr[i];
+      html+='<div class="comment"><div class="ava">'+esc(c.a||'💬')+'</div><div><div class="cname">'+esc(c.n||'Гость')+' '+(c.time?'<span class="ctime">'+esc(c.time)+'</span>':'')+'</div><div class="ctext">'+esc(c.t)+'</div></div></div>';
+    }
+    document.getElementById('clist').innerHTML=html||'<div style="color:#999;padding:10px">Пока нет комментариев. Будь первым!</div>';
+    document.getElementById('cHead').textContent='КОММЕНТАРИИ ('+arr.length+')';
+  }
+
   var isCorr=false,editingId=null;
   var modal=document.getElementById('corrModal');
   var nTitle=document.getElementById('nTitle'),nLead=document.getElementById('nLead'),nText=document.getElementById('nText'),nPhotos=document.getElementById('nPhotos'),nSec=document.getElementById('nSec'),nDone=document.getElementById('nDone'),tagRow=document.getElementById('tagRow');
@@ -558,15 +565,17 @@ footer b{color:#fff}
   modal.addEventListener('click',function(e){if(e.target===modal)modal.style.display='none';});
   function tryLogin(){
     var v=document.getElementById('corrPass').value;
-    if(v===PASS){
-      isCorr=true;
-      document.getElementById('editHero').style.display='inline-block';
-      renderAll();route();
-      openEditor(null);
-      toast('🎤 Добро пожаловать в редакцию!');
-    }else{
-      document.getElementById('corrErr').textContent='Неверный пароль.';
-    }
+    api('/api/login',{pass:v}).then(function(r){
+      if(r.ok){
+        isCorr=true;PASS=v;
+        document.getElementById('editHero').style.display='inline-block';
+        renderAll();route();
+        openEditor(null);
+        toast('🎤 Добро пожаловать в редакцию!');
+      }else{
+        document.getElementById('corrErr').textContent='Неверный пароль.';
+      }
+    }).catch(function(){document.getElementById('corrErr').textContent='База не отвечает. Проверь D1 в wrangler.toml.';});
   }
   document.getElementById('corrSubmit').addEventListener('click',tryLogin);
   document.getElementById('corrPass').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
@@ -594,29 +603,34 @@ footer b{color:#fff}
     var cbs=tagRow.querySelectorAll('input:checked');
     for(var i=0;i<cbs.length;i++)tags.push(cbs[i].value);
     var item={id:editingId||('c'+Date.now()),t:t,lead:nLead.value.trim(),text:nText.value.trim(),photos:nPhotos.value.split('\n').map(function(s){return s.trim()}).filter(Boolean),tags:tags,sec:nSec.value,time:nowStr(),cust:1,hero:0};
+    var payload;
     if(editingId&&isDefaultId(editingId)){
       item.cust=0;item.hero=editingId==='egor'?1:0;
-      var over=loadOver();over[editingId]=item;saveOver(over);
+      payload={action:'edit',def:1,id:editingId,item:item,pass:PASS};
     }else if(editingId){
-      var arr=loadCustom(),found=false;
-      for(var j=0;j<arr.length;j++){if(arr[j].id===editingId){item.cust=1;item.hero=arr[j].hero||0;arr[j]=item;found=true;break;}}
-      if(!found)arr.unshift(item);
-      saveCustom(arr);
+      payload={action:'edit',id:editingId,item:item,pass:PASS};
     }else{
-      var a2=loadCustom();a2.unshift(item);saveCustom(a2);
+      payload={action:'add',item:item,pass:PASS};
     }
-    nTitle.value='';nLead.value='';nText.value='';nPhotos.value='';
-    var cbs2=tagRow.querySelectorAll('input');
-    for(var k=0;k<cbs2.length;k++)cbs2[k].checked=false;
-    modal.style.display='none';
-    renderAll();route();
-    toast('✅ Опубликовано!');
-    burst();
+    api('/api/save',payload).then(function(r){
+      if(r.ok){
+        STATE.news=r.news||[];STATE.over=r.over||{};
+        nTitle.value='';nLead.value='';nText.value='';nPhotos.value='';
+        var cbs2=tagRow.querySelectorAll('input');
+        for(var k=0;k<cbs2.length;k++)cbs2[k].checked=false;
+        modal.style.display='none';
+        renderAll();route();
+        toast('✅ Опубликовано!');
+        burst();
+      }else{
+        nDone.textContent='⚠️ '+(r.err||'Ошибка сохранения');
+      }
+    }).catch(function(){nDone.textContent='⚠️ База не отвечает.';});
   });
 
   function renderAll(){renderHero();buildTicker();renderChips();renderFeed();}
 
-  var poll=[{l:'Виноват угол 89° 📐',v:5421},{l:'Виноват кабель 🔌',v:2318},{l:'Держись, Егор 💪',v:4107}];
+  var poll=[{l:'Бандит — герой года 🐈',v:5421},{l:'Вернуть игрушки! 🎄',v:2318},{l:'Держись, Егор 💪',v:4107}];
   var voted=false,box=document.getElementById('pollBox');
   function renderPoll(){
     var total=0,i,html='';
@@ -649,15 +663,12 @@ footer b{color:#fff}
     var inp=document.getElementById('cinput');
     var t=inp.value.trim();
     if(!t)return;
-    var div=document.createElement('div');
-    div.className='comment';
-    div.innerHTML='<div class="ava">🌭</div><div><div class="cname">Вы <span class="ctime">только что</span></div><div class="ctext"></div></div>';
-    div.querySelector('.ctext').textContent=t;
-    clist.insertBefore(div,clist.firstChild);
-    inp.value='';
+    api('/api/comment',{text:t}).then(function(r){
+      if(r.ok){STATE.comments=r.comments||[];renderComments();inp.value='';toast('💬 Комментарий сохранён!');}
+    }).catch(function(){toast('⚠️ База не отвечает');});
   });
 
-  var EMO=['🌭','💥',''];
+  var EMO=['🎄','','🐈'];
   function drop(){
     var el=document.createElement('span');
     el.className='drop';
@@ -671,8 +682,10 @@ footer b{color:#fff}
   function burst(){for(var i=0;i<50;i++){setTimeout(drop,i*35);}}
   document.getElementById('rainBtn').addEventListener('click',burst);
 
-  renderAll();
-  route();
+  api('/api/state').then(function(st){
+    if(st&&st.ok){STATE.news=st.news||[];STATE.over=st.over||{};STATE.comments=st.comments||[];}
+    renderAll();route();renderComments();
+  }).catch(function(){renderAll();route();renderComments();});
 })();
 </script>
 </body>
