@@ -2,7 +2,7 @@ var SECRET = 'sanya2026';
 
 var DEF_COMMENTS = [
   {n:'Мария',a:'👵',t:'Ох, бедный Егор. Держись, милый!'},
-  {н:'Олег',a:'🧔',t:'Бандит — легенда. Но игрушки верни!'},
+  {n:'Олег',a:'🧔',t:'Бандит — легенда. Но игрушки верни!'},
   {n:'Голубь',a:'🐦',t:'Видели, как кот тащил гирлянду. 💨'}
 ];
 
@@ -29,24 +29,24 @@ export default {
         if (b.action === 'add') {
           var arr = await read(env, 'news', []);
           arr.unshift(b.item);
-          await env.DB.put('news', JSON.stringify(arr));
+          await put(env, 'news', arr);
         } else if (b.action === 'edit') {
           if (b.def) {
             var over2 = await read(env, 'over', {});
             over2[b.id] = b.item;
-            await env.DB.put('over', JSON.stringify(over2));
+            await put(env, 'over', over2);
           } else {
             var arr2 = await read(env, 'news', []);
             for (var i = 0; i < arr2.length; i++) {
               if (arr2[i].id === b.id) { arr2[i] = b.item; break; }
             }
-            await env.DB.put('news', JSON.stringify(arr2));
+            await put(env, 'news', arr2);
           }
         } else if (b.action === 'del') {
           var arr3 = await read(env, 'news', []);
           var na = [];
           for (var j = 0; j < arr3.length; j++) if (arr3[j].id !== b.id) na.push(arr3[j]);
-          await env.DB.put('news', JSON.stringify(na));
+          await put(env, 'news', na);
         }
         return json({ok:true, news:await read(env,'news',[]), over:await read(env,'over',{})});
       }
@@ -56,7 +56,7 @@ export default {
         if (!t) return json({ok:false});
         var carr = await read(env, 'comments', null) || DEF_COMMENTS.slice();
         carr.unshift({n:'Вы', a:'🎤', t:t, time:'только что'});
-        await env.DB.put('comments', JSON.stringify(carr));
+        await put(env, 'comments', carr);
         return json({ok:true, comments:carr});
       }
       return json({ok:false}, 404);
@@ -66,11 +66,19 @@ export default {
   },
 };
 
+async function ensure(env) {
+  await env.DB.prepare('CREATE TABLE IF NOT EXISTS store (key TEXT PRIMARY KEY, value TEXT)').run();
+}
 async function read(env, key, def) {
   try {
-    var v = await env.DB.get(key);
-    return v ? JSON.parse(v) : def;
+    await ensure(env);
+    var row = await env.DB.prepare('SELECT value FROM store WHERE key = ?1').bind(key).first();
+    return row ? JSON.parse(row.value) : def;
   } catch (e) { return def; }
+}
+async function put(env, key, val) {
+  await ensure(env);
+  await env.DB.prepare('INSERT INTO store (key, value) VALUES (?1, ?2) ON CONFLICT(key) DO UPDATE SET value = ?2').bind(key, JSON.stringify(val)).run();
 }
 function json(o, code) {
   return new Response(JSON.stringify(o), {
