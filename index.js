@@ -17,7 +17,8 @@ var SHITOV_NEWS = {
   time:'8 сентября, сегодня'
 };
 
-var SHORTS_CSS = '<style id="shorts-photo-style">.rphoto{aspect-ratio:9 / 16;width:min(100%,420px);margin:0 auto 12px;border-radius:14px;overflow:hidden;background:#111;box-shadow:0 12px 40px rgba(0,0,0,.25)}.rphoto img{width:100%;height:100%;max-height:none;object-fit:cover;display:block;cursor:zoom-in}@media(max-width:760px){.rphoto{width:min(100%,360px);border-radius:12px}}</style>';
+var SHORTS_CSS = '<style id="shorts-photo-style">/* Article photos: always vertical Shorts-style by default */.rphoto{position:relative!important;aspect-ratio:9 / 16!important;width:min(100%,420px)!important;height:auto!important;margin:0 auto 12px!important;border-radius:14px!important;overflow:hidden!important;background:#111!important;box-shadow:0 12px 40px rgba(0,0,0,.25)!important}.rphoto img{display:block!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;aspect-ratio:9 / 16!important;object-fit:cover!important;object-position:center!important;cursor:zoom-in!important}@media(max-width:760px){.rphoto{width:min(100%,360px)!important;border-radius:12px!important}}/* keep the same vertical framing after dynamic article renders */</style>';
+var SHORTS_SCRIPT = '<script>(function(){function applyShorts(){var list=document.querySelectorAll(".rphoto");for(var i=0;i<list.length;i++){var box=list[i],img=box.querySelector("img");box.style.setProperty("aspect-ratio","9 / 16","important");box.style.setProperty("height","auto","important");box.style.setProperty("width",window.innerWidth<=760?"min(100%,360px)":"min(100%,420px)","important");if(img){img.style.setProperty("width","100%","important");img.style.setProperty("height","100%","important");img.style.setProperty("max-height","none","important");img.style.setProperty("object-fit","cover","important");}}}applyShorts();new MutationObserver(applyShorts).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("resize",applyShorts);})();</script>';
 
 export default {
   async fetch(request, env, ctx) {
@@ -27,7 +28,7 @@ export default {
         var asset = await env.ASSETS.fetch(request);
         if (asset.ok) {
           var html = await asset.text();
-          html = html.replace('</head>', SHORTS_CSS + '</head>');
+          html = html.replace('</head>', SHORTS_CSS + SHORTS_SCRIPT + '</head>');
           var headers = new Headers(asset.headers);
           headers.set('cache-control','no-store');
           headers.set('content-type','text/html; charset=UTF-8');
