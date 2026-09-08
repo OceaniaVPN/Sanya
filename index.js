@@ -6,6 +6,18 @@ var DEF_COMMENTS = [
   {n:'Голубь',a:'🐦',t:'Видели, как кот тащил гирлянду. 💨'}
 ];
 
+var SHITOV_NEWS = {
+  id:'sh​itov-turkey-20260908',
+  title:'Шитов в Турции: отпуск продолжается, шалости — тоже',
+  lead:'Юмористическая заметка: похоже, поездка Шитова в Турцию проходит совсем не скучно.',
+  text:'Свежий кадр с отдыха уже появился в редакции. Судя по фотографии, Шитов решил не терять время и устроить немного веселья. История подаётся как лёгкая шутка, а не как утверждение о реальных нарушениях или проступках.',
+  image:'https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/IMG_20260908_094905_735.jpg',
+  tag:'ТУРЦИЯ',
+  category:'Юмор',
+  date:'8 сентября 2026',
+  time:'сегодня'
+};
+
 export default {
   async fetch(request, env, ctx) {
     var url = new URL(request.url);
@@ -17,6 +29,14 @@ export default {
         var news = await read(env, 'news', []);
         var over = await read(env, 'over', {});
         var comments = await read(env, 'comments', null);
+        var exists = false;
+        for (var ni = 0; ni < news.length; ni++) {
+          if (news[ni] && news[ni].id === SHITOV_NEWS.id) { exists = true; break; }
+        }
+        if (!exists) {
+          news.unshift(SHITOV_NEWS);
+          await put(env, 'news', news);
+        }
         return json({ok:true, news:news, over:over, comments:comments || DEF_COMMENTS});
       }
       if (request.method === 'POST' && url.pathname === '/api/login') {
