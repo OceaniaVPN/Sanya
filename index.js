@@ -17,10 +17,24 @@ var SHITOV_NEWS = {
   time:'8 сентября, сегодня'
 };
 
+var SHORTS_CSS = '<style id="shorts-photo-style">.rphoto{aspect-ratio:9 / 16;width:min(100%,420px);margin:0 auto 12px;border-radius:14px;overflow:hidden;background:#111;box-shadow:0 12px 40px rgba(0,0,0,.25)}.rphoto img{width:100%;height:100%;max-height:none;object-fit:cover;display:block;cursor:zoom-in}@media(max-width:760px){.rphoto{width:min(100%,360px);border-radius:12px}}</style>';
+
 export default {
   async fetch(request, env, ctx) {
     var url = new URL(request.url);
     if (url.pathname.indexOf('/api/') !== 0) {
+      if (url.pathname === '/' || url.pathname === '/index.html') {
+        var asset = await env.ASSETS.fetch(request);
+        if (asset.ok) {
+          var html = await asset.text();
+          html = html.replace('</head>', SHORTS_CSS + '</head>');
+          var headers = new Headers(asset.headers);
+          headers.set('cache-control','no-store');
+          headers.set('content-type','text/html; charset=UTF-8');
+          return new Response(html, {status:asset.status, headers:headers});
+        }
+        return asset;
+      }
       return env.ASSETS.fetch(request);
     }
     try {
