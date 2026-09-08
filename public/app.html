@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ОГОНЬ·24 — главные новости</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#d90429;--dark:#101014;--paper:#f4f1ea;--ink:#181818;--card:#fff;--mut:#6b6b6b}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Rubik',system-ui,Arial,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+img{max-width:100%;display:block}
+#pbar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--red),#ff7b00);width:0;z-index:1001}
+.topbar{background:var(--dark);color:#cfcfd6;font-size:12px;display:flex;justify-content:space-between;gap:12px;padding:6px 16px;flex-wrap:wrap}
+.site-head{background:#fff;display:flex;align-items:center;gap:16px;padding:14px 24px;box-shadow:0 2px 12px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000;flex-wrap:wrap}
+.logo{font-size:28px;font-weight:900;letter-spacing:1px;white-space:nowrap}
+.logo b{color:var(--red)}
+.flame{display:inline-block;animation:flick 1s infinite alternate}
+@keyframes flick{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
+nav{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto}
+nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.5px;padding:6px 2px;border-bottom:3px solid transparent;white-space:nowrap;cursor:pointer}
+nav a:hover{border-color:var(--red);color:var(--red)}
+.head-right{display:flex;gap:8px;align-items:center}
+.corr-btn{background:var(--dark);color:#fff;border:none;border-radius:20px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
+.corr-btn:hover{background:var(--red)}
+.live{background:var(--red);color:#fff;font-weight:700;font-size:12px;padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+.live .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
+.breaking{display:flex;align-items:center;color:#fff;overflow:hidden;background:repeating-linear-gradient(45deg,var(--red) 0 20px,#a4001f 20px 40px);animation:stripe 3s linear infinite}
+@keyframes stripe{to{background-position:56px 0}}
+.breaking-label{background:var(--dark);padding:10px 18px;font-weight:900;letter-spacing:2px;animation:blink 1.2s steps(2) infinite;white-space:nowrap}
+@keyframes blink{50%{opacity:.55}}
+.ticker{overflow:hidden;flex:1}
+.ticker-track{display:flex;width:max-content;animation:tick 35s linear infinite}
+.tgroup{display:flex;gap:40px;padding:10px 20px;white-space:nowrap;font-weight:500}
+@keyframes tick{to{transform:translateX(-50%)}}
+.layout{max-width:1200px;margin:28px auto;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;padding:0 16px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.tags span{background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;letter-spacing:1px;margin-right:6px}
+.tags span.alt{background:var(--dark)}
+h1{font-size:clamp(24px,4vw,44px);line-height:1.15;margin:14px 0 12px;font-weight:900;word-wrap:break-word;background:linear-gradient(90deg,#111 20%,var(--red) 50%,#111 80%);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:grad 4s linear infinite}
+@keyframes grad{to{background-position:200%}}
+.lead{font-size:17px;color:#333;line-height:1.6;border-left:4px solid var(--red);padding-left:14px;margin-bottom:14px}
+.meta{color:var(--mut);font-size:13px;margin-bottom:18px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero-photo{position:relative;overflow:hidden;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.25);cursor:zoom-in}
+.hero-photo img{width:100%;height:480px;object-fit:cover;animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(2%,-2%)}}
+.hero-photo figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#eee;font-size:13px;padding:26px 16px 12px}
+.age{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;border:2px solid #fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.article p{margin:0 0 14px;line-height:1.7;font-size:16px}
+.strip{overflow:hidden;margin:18px 0;border-radius:12px}
+.strip-track{display:flex;gap:10px;width:max-content;animation:tick 25s linear infinite}
+.strip img{width:160px;height:100px;object-fit:cover;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:26px 0}
+.stat{background:var(--card);border-radius:12px;padding:18px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.08);border-top:4px solid var(--red)}
+.stat .num{font-size:34px;font-weight:900;color:var(--red)}
+.stat .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.sechead{font-size:22px;font-weight:900;border-left:6px solid var(--red);padding-left:12px;margin:26px 0 16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{background:#fff;border:2px solid #e2ddd2;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;transform:scale(1.05)}
+.timeline{margin:10px 0 26px;padding-left:26px;border-left:3px solid var(--red)}
+.tl{position:relative;padding:0 0 18px 14px}
+.tl::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px #ffd7dc}
+.tl .time{font-weight:900;color:var(--red)}
+blockquote{background:var(--dark);color:#fff;border-radius:12px;padding:22px 26px 22px 44px;font-size:20px;font-style:italic;margin:20px 0;position:relative}
+blockquote::before{content:'«';font-size:70px;color:var(--red);position:absolute;top:6px;left:12px;opacity:.6}
+.share{display:flex;gap:10px;align-items:center;margin:18px 0;flex-wrap:wrap}
+.share button{width:46px;height:46px;border-radius:50%;border:none;font-size:20px;cursor:pointer;transition:transform .2s;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.share button:hover{transform:scale(1.2) rotate(8deg)}
+.widget{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px}
+.widget h3{font-size:16px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;border-bottom:3px solid var(--red);display:inline-block;padding-bottom:4px}
+.poll-opt{display:block;width:100%;text-align:left;background:#f1ede4;border:none;border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:background .2s}
+.poll-opt:hover{background:#ffe3e8}
+.poll-bar{background:#f1ede4;border-radius:8px;overflow:hidden;margin-bottom:6px}
+.poll-bar .fill{height:30px;background:linear-gradient(90deg,var(--red),#ff7b00);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;border-radius:8px;transition:width 1s ease}
+.readlist a{display:block;padding:9px 0;border-bottom:1px dashed #ccc;color:var(--ink);text-decoration:none;font-size:14px;cursor:pointer}
+.readlist a:hover{color:var(--red)}
+.ad{background:linear-gradient(135deg,#0f9b0f,#0b6b0b);color:#fff;border-radius:12px;padding:20px;text-align:center;position:relative;overflow:hidden;margin-bottom:18px}
+.ad::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:rgba(255,255,255,.35);transform:skewX(-20deg);animation:shine 2.6s infinite}
+@keyframes shine{to{left:130%}}
+.ad .big{font-size:26px;font-weight:900}
+.more{max-width:1200px;margin:10px auto 30px;padding:0 16px}
+.more-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.mcard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.1);color:var(--ink);transition:transform .25s,box-shadow .25s;position:relative;cursor:pointer}
+.mcard:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(217,4,41,.3)}
+.mcard img{height:150px;width:100%;object-fit:cover}
+.mcard .mt{padding:12px 14px;font-weight:700;font-size:14px}
+.msub{font-weight:400;font-size:12px;color:#6b6b6b;margin-top:4px}
+.mmeta{font-weight:400;font-size:11px;color:#999;margin-top:6px}
+.cbadge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:3px;z-index:2}
+.cdel{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;z-index:2}
+.editbtn{position:absolute;top:8px;right:40px;background:var(--red);color:#fff;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;z-index:2}
+.ttag{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:3px;margin:0 4px 4px 0;letter-spacing:1px}
+.ttag.alt{background:var(--dark)}
+.page{max-width:900px;margin:24px auto;padding:0 16px}
+.backbtn{display:inline-block;margin:0 0 16px;background:#fff;border:2px solid #e2ddd2;border-radius:20px;padding:8px 16px;font-weight:700;font-size:13px;color:var(--ink);text-decoration:none;transition:all .2s}
+.backbtn:hover{border-color:var(--red);color:var(--red)}
+.rphoto{margin:0 0 12px;border-radius:10px;overflow:hidden}
+.rphoto img{width:100%;max-height:480px;object-fit:cover;cursor:zoom-in}
+.comments{max-width:1200px;margin:0 auto 40px;padding:0 16px}
+.comment{display:flex;gap:12px;background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 3px 10px rgba(0,0,0,.07)}
+.ava{width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.cname{font-weight:700;font-size:14px}
+.ctime{color:var(--mut);font-size:12px;font-weight:400}
+.ctext{font-size:14px;margin-top:4px;word-wrap:break-word}
+.cform{display:flex;gap:10px;margin-top:14px}
+.cform input{flex:1;min-width:0;border:2px solid #ddd;border-radius:10px;padding:12px;font-size:14px;font-family:inherit}
+.cform input:focus{outline:none;border-color:var(--red)}
+.cform button{background:var(--red);color:#fff;border:none;border-radius:10px;padding:0 20px;font-weight:700;cursor:pointer}
+footer{background:var(--dark);color:#9a9aa3;padding:30px 16px;text-align:center;font-size:13px;margin-top:40px}
+footer b{color:#fff}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:2000;cursor:zoom-out;padding:12px}
+#lightbox img{max-width:92vw;max-height:92vh;border:6px solid #fff;border-radius:8px;box-shadow:0 0 60px rgba(255,0,60,.5)}
+#rainBtn{position:fixed;right:18px;bottom:18px;z-index:1500;background:var(--red);color:#fff;border:none;border-radius:30px;padding:14px 22px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(217,4,41,.5);animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.drop{position:fixed;top:-60px;z-index:1400;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:3000;padding:16px}
+.modal-box{background:#fff;border-radius:14px;max-width:520px;width:100%;padding:24px;position:relative;max-height:90vh;overflow-y:auto}
+.modal-close{position:absolute;top:10px;right:14px;cursor:pointer;font-size:18px;color:var(--mut);z-index:5}
+.modal-box h3{margin-bottom:12px;font-size:20px}
+.modal-box input,.modal-box textarea,.modal-box select{width:100%;border:2px solid #ddd;border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:10px;font-family:inherit;background:#fff}
+.modal-box textarea{min-height:110px;resize:vertical}
+.modal-box input:focus,.modal-box textarea:focus,.modal-box select:focus{outline:none;border-color:var(--red)}
+.tagrow{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;font-size:13px;font-weight:600}
+.tagrow label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.btn-red{background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-weight:800;cursor:pointer;font-size:14px}
+.btn-ghost{background:#eee;color:#333;border:none;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer;font-size:13px;margin-left:8px}
+.muted{color:var(--mut);font-size:13px;margin-bottom:12px}
+.merr{color:var(--red);font-size:13px;margin:6px 0;min-height:16px}
+.mok{color:#1a7f37;font-size:13px;margin-top:8px;min-height:16px}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:12px 22px;border-radius:30px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .3s;z-index:4000;max-width:90vw;text-align:center}
+#toast.show{opacity:1}
+@media(max-width:760px){
+ .site-head{gap:10px;padding:10px 12px}
+ .logo{font-size:22px}
+ nav{order:3;width:100%;margin-left:0;flex-wrap:nowrap;overflow-x:auto;gap:14px;padding-bottom:4px;scrollbar-width:none}
+ .hero-photo img{height:300px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .cform{flex-wrap:wrap}
+ .cform button{width:100%;padding:12px}
+ #rainBtn{right:10px;bottom:10px;padding:12px 16px;font-size:13px}
+ .topbar{font-size:10px;gap:6px}
+ blockquote{font-size:16px;padding:18px 18px 18px 34px}
+ blockquote::before{font-size:48px}
+ .layout{margin:16px auto;gap:16px}
+ .breaking-label{padding:10px 12px;font-size:12px;letter-spacing:1px}
+ .tgroup{gap:24px;font-size:13px}
+ .strip img{width:120px;height:80px}
+}
+@media(max-width:420px){
+ .hero-photo img{height:230px}
+ .stat .num{font-size:26px}
+ .more-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="pbar"></div>
+
+<div class="topbar">
+  <span id="dateNow"></span>
+  <span>USD 79,5 ▲ · EUR 86,2 ▼ · RTX 5090 — БЫЛА</span>
+  <span>🕐 <span id="clock"></span> · 🌡 +24°C</span>
+</div>
+
+<header class="site-head">
+  <div class="logo"><span class="flame">🔥</span> ОГОНЬ<b>·24</b></div>
+  <nav>
+    <a href="#/">Главное</a><a href="#/sec/inc">Происшествия</a><a href="#/sec/saus">Котики</a><a href="#/sec/soc">Общество</a><a href="#/sec/cul">Культура</a>
+  </nav>
+  <div class="head-right">
+    <button id="corrBtn" class="corr-btn">🎤 Корреспондент</button>
+    <div class="live"><span class="dot"></span>LIVE</div>
+  </div>
+</header>
+
+<div class="breaking">
+  <span class="breaking-label">СРОЧНО</span>
+  <div class="ticker"><div class="ticker-track" id="tickerTrack"></div></div>
+</div>
+
+<div id="viewHome">
+<main class="layout">
+  <article>
+    <div class="tags" id="heroTags"></div>
+    <h1 id="heroTitle"></h1>
+    <p class="lead" id="heroLead"></p>
+    <div class="meta"><span>✍️ Редакция ОГОНЬ·24</span><span>👁 <span id="views">0</span></span><span>📍 Сборочная зона</span><button id="editHero" class="btn-ghost" style="display:none">✏️ Редактировать</button></div>
+
+    <figure class="hero-photo">
+      <img id="heroImg" src="" alt="Фото новости">
+      <span class="age">0+</span>
+      <figcaption>Дымящиеся последствия инцидента. Фото: соседи, прибежавшие на хлопок</figcaption>
+    </figure>
+
+    <div class="strip"><div class="strip-track" id="stripTrack"></div></div>
+
+    <div class="article" id="heroText" style="margin-top:10px"></div>
+
+    <div class="stats">
+      <div class="stat"><div class="num" data-target="5090"></div><div class="lbl">модель мечты</div></div>
+      <div class="stat"><div class="num" data-target="89" data-suffix="°"></div><div class="lbl">угол кабеля</div></div>
+      <div class="stat"><div class="num" data-target="1"></div><div class="lbl">секунда до «бабах»</div></div>
+      <div class="stat"><div class="num" data-target="100" data-suffix="%"></div><div class="lbl">боль и дым</div></div>
+    </div>
+
+    <h2 class="sechead">ХРОНИКА ТРАГЕДИИ</h2>
+    <div class="timeline">
+      <div class="tl"><span class="time">18:01</span> — Егор получает RTX 5090. Руки дрожат.</div>
+      <div class="tl"><span class="time">18:14</span> — Карта установлена. Егор горд собой.</div>
+      <div class="tl"><span class="time">18:17</span> — Кабель воткнут под углом 89°. «И так сойдёт».</div>
+      <div class="tl"><span class="time">18:18</span> — «БАБАХ». Кот уходит под кровать.</div>
+      <div class="tl"><span class="time">18:20</span> — Соседи с огнетушителем. Егор молчит.</div>
+    </div>
+
+    <blockquote>Один градус решил всё.»<br><small style="color:#bbb">— Егор, в эксклюзивном интервью ОГОНЬ·24</small></blockquote>
+
+    <div class="share">
+      <span style="font-weight:700">Поделиться:</span>
+      <button>📨</button><button>💬</button><button>💥</button>
+    </div>
+  </article>
+ <aside>
+    <div class="widget">
+      <h3>Опрос дня</h3>
+      <div id="pollBox"></div>
+    </div>
+    <div class="widget">
+      <h3>Сейчас читают</h3>
+      <div class="readlist">
+        <a href="#/news/bandit">Коричневый кот Бандит украл все новогодние игрушки</a>
+        <a href="#/news/bandit2">Бандит вернул игрушки с процентами — найден 48-й шар</a>
+        <a href="#/news/top10">Топ-10 мест, где коты прячут игрушки — №4 удивит всех</a>
+        <a href="#/news/n5">Учёные доказали: коты повышают настроение на 87%</a>
+        <a href="#/news/n7">Ёлка снова в моде: репортаж из двора</a>
+      </div>
+    </div>
+    <div class="ad">
+      <div class="big">ИГРУШКИН™</div>
+      <p>Вернём всё, что укатилось под диван!</p>
+      <p style="font-size:24px">🎄</p>
+    </div>
+    <div class="widget">
+      <h3>Погода</h3>
+      <div style="font-size:40px">🌤</div>
+      <p style="font-weight:700">+24°C</p>
+      <p style="font-size:13px;color:var(--mut)">Местами мишура. Ветер южный.</p>
+    </div>
+  </aside>
+</main>
+
+<section class="more" id="feedSec">
+  <h2 class="sechead" id="feedTitle">ЛЕНТА НОВОСТЕЙ</h2>
+  <div class="chips" id="chips"></div>
+  <div class="more-grid" id="feedGrid"></div>
+</section>
+
+<section class="comments">
+  <h2 class="sechead" id="cHead">КОММЕНТАРИИ</h2>
+  <div id="clist"></div>
+  <form class="cform" id="cform">
+    <input id="cinput" placeholder="Ваш комментарий..." maxlength="300">
+    <button type="submit">Отправить</button>
+  </form>
+</section>
+</div>
+
+<div id="viewSec" style="display:none">
+  <section class="more">
+    <h2 class="sechead" id="secTitle"></h2>
+    <div class="more-grid" id="secGrid"></div>
+  </section>
+</div>
+
+<div id="viewArticle" style="display:none">
+  <section class="page">
+    <div id="artBody"></div>
+  </section>
+</div>
+
+<footer>
+  <p><b>🔥 ОГОНЬ·24</b> · Сетевое издание «Дым и мишура» · 0+</p>
+  <p>Это пародийный новостной сайт. Все совпадения случайны.</p>
+  <p>🎤 Вход для корреспондентов — по паролю. © 2026 Редакция ОГОНЬ·24</p>
+</footer>
+
+<button id="rainBtn">🎄 ПРАЗДНИЧНЫЙ ДОЖДЬ</button>
+<div id="toast"></div>
+<div id="lightbox"><img id="lbImg" src="" alt=""></div>
+
+<div id="corrModal" class="modal">
+  <div class="modal-box">
+    <span class="modal-close" id="corrClose">✕</span>
+    <div id="corrLogin">
+      <h3>🎤 Вход для корреспондентов</h3>
+      <p class="muted">Доступ только по паролю. Спроси у главреда.</p>
+      <input id="corrPass" type="password" placeholder="Пароль корреспондента">
+      <div class="merr" id="corrErr"></div>
+      <button id="corrSubmit" class="btn-red">Войти в редакцию</button>
+    </div>
+    <div id="corrEditor" style="display:none">
+      <h3 id="edHead">📝 Создать новость</h3>
+      <input id="nTitle" placeholder="Заголовок* (обязательно)" maxlength="150">
+      <input id="nLead" placeholder="Короткое описание (лид)" maxlength="250">
+      <textarea id="nText" placeholder="Текст новости. Пустая строка = новый абзац. Пиши хоть поэму!"></textarea>
+      <textarea id="nPhotos" placeholder="Ссылки на фото — по одной в строке" style="min-height:50px"></textarea>
+      <div class="tagrow" id="tagRow">
+        <label><input type="checkbox" value="ЭКСКЛЮЗИВ">Эксклюзив</label>
+        <label><input type="checkbox" value="РЕПОРТАЖ">Репортаж</label>
+        <label><input type="checkbox" value="СРОЧНО">Срочно</label>
+        <label><input type="checkbox" value="ИНТЕРВЬЮ">Интервью</label>
+      </div>
+      <select id="nSec">
+        <option value="inc">Раздел: Происшествия</option>
+        <option value="saus">Раздел: Котики</option>
+        <option value="soc">Раздел: Общество</option>
+        <option value="cul">Раздел: Культура</option>
+      </select>
+      <button id="nPublish" class="btn-red">🚀 Опубликовать</button>
+      <div class="mok" id="nDone"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function svgImg(e){return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="#101014"/><text x="200" y="170" font-size="110" text-anchor="middle">'+e+'</text></svg>');}
+  var FALLBACK=svgImg('📰');
+  var CATIMG=svgImg('🐈');
+  var TREEIMG=svgImg('🎄');
+  var EGORPHOTO='https://raw.githubusercontent.com/OceaniaVPN/Sanya/main/2021-01-07%2008-45-19.JPG';
+  var SECS={inc:'Происшествия',saus:'Котики',soc:'Общество',cul:'Культура'};
+  var DEFAULTS=[
+    {id:'egor',hero:1,sec:'inc',tags:['ЭКСКЛЮЗИВ','СРОЧНО'],t:'«Воткнул под 89°»: у Егора бабахнул ПК с новенькой RTX 5090',lead:'Эксклюзивный репортаж с места событий: всего один градус угла кабеля отделял мечту от дыма.',text:'Трагедия, потрясшая всё ПК-сообщество, произошла на этой неделе. Егор два года копил на RTX 5090 и, когда наконец установил её, решил сэкономить время: кабель питания он воткнул под углом 89 градусов вместо положенных 90.\n\n«Я думал, один градус ничего не решит», — рассказал Егор корреспонденту ОГОНЬ·24, вытирая пепел со стола.\n\nЧерез секунду после включения раздался хлопок, соседи решили, что начался салют, а кот ушёл под кровать на три часа. Карта, блок питания и часть стола утрачены. Угол 89° вошёл в историю.',photos:[EGORPHOTO],time:'19 августа, 18:20'},
+    {id:'bandit',sec:'saus',tags:['ЭКСКЛЮЗИВ','РЕПОРТАЖ'],t:'«Пушистая банда»: коричневый кот Бандит украл все новогодние игрушки',lead:'Целую неделю в доме пропадали мишура и шары. Детектив раскрыл сам себя, уснув на добыче.',text:'Всё началось с того, что у хозяев дома стала пропадать новогодняя мишура. Сначала исчез один шар, потом гирлянда, а под конец — целый мешок игрушек, приготовленных к празднику.\n\nХозяева установили камеру и ахнули: в 23:58 в комнату крадётся коричневый кот по кличке Бандит, хватает игрушку за игрушкой и уносит их под диван.\n\nПод диваном оперативники нашли 47 шаров, три гирлянды и мишуру. Бандит спал на куче добычи и сдался без сопротивления. Игрушки возвращены на ёлку, а Бандит получил внеочередную порцию вкусняшек — по словам хозяев, «за раскаяние».',photos:[CATIMG],time:'30 декабря, 23:58'},
+    {id:'bandit2',sec:'saus',tags:['СРОЧНО'],t:'Бандит вернул игрушки с процентами: под диваном найден 48-й шар',lead:'Расследование ОГОНЬ·24 продолжается.',text:'Во время уборки оперативники обнаружили под диваном ещё один шар — сорок восьмой. Откуда он взялся, Бандит объяснить отказался.\n\nЭксперты сходятся во мнении: кот просто хотел, чтобы праздник длился дольше. Мы тоже.',photos:[CATIMG],time:'31 декабря, 12:00'},
+    {id:'top10',sec:'saus',tags:[],t:'Топ-10 мест, где коты прячут новогодние игрушки — №4 удивит всех',lead:'Подборка от редакции.',text:'От классического «под диваном» до сейфа с документами — мы отобрали лучшие тайники.\n\nПобедитель рейтинга — коробка из-под этих же игрушек. Котики любят иронию.',photos:[CATIMG],time:'31 декабря, 15:30'},
+    {id:'n5',sec:'soc',tags:[],t:'Учёные доказали: коты повышают настроение на 87%',lead:'Сенсация в мире науки.',text:'В эксперименте приняли участие 100 добровольцев. Контрольная группа сидела без котов.\n\nРезультаты превзошли ожидания: настроение выросло на 87%, а желание завести второго кота — на все 100%.',photos:[CATIMG],time:'18 августа, 10:05'},
+    {id:'n7',sec:'cul',tags:['РЕПОРТАЖ'],t:'Ёлка снова в моде: репортаж из двора, где её наряжали всем подъездом',lead:'Корреспонденты ОГОНЬ·24 убедились: праздник возвращается.',text:'Наш фотокорреспондент провёл во дворе целый час и сделал 47 кадров.\n\nСпойлер: ёлка стоит, гирлянда горит, Бандит наблюдает с подоконника.',photos:[TREEIMG],time:'18 августа, 12:00'}
+  ];
+  var STATE={news:[],over:{},comments:null};
+  var PASS='';
+  function pad(n){return n<10?'0'+n:n}
+  function fmt(n){return n.toLocaleString('ru-RU')}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function nowStr(){return new Date().toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})}
+  function api(path,body){
+    return fetch(path,body?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}:undefined).then(function(r){return r.json()});
+  }
+  function isDefaultId(id){for(var i=0;i<DEFAULTS.length;i++)if(DEFAULTS[i].id===id)return true;return false}
+  function merge(a,b){var r={};for(var k in a)r[k]=a[k];for(var k2 in b)r[k2]=b[k2];return r}
+  function getAll(){
+    var out=[],i;
+    for(i=0;i<DEFAULTS.length;i++){var d=DEFAULTS[i];out.push(STATE.over[d.id]?merge(d,STATE.over[d.id]):d);}
+    for(i=0;i<STATE.news.length;i++)out.push(STATE.news[i]);
+    return out;
+  }
+  function find(id){var all=getAll();for(var i=0;i<all.length;i++)if(all[i].id===id)return all[i];return null}
+  function tagsHtml(tags){
+    if(!tags||!tags.length)return '';
+    var h='';
+    for(var i=0;i<tags.length;i++)h+='<span class="ttag'+(i%2?' alt':'')+'">'+esc(tags[i])+'</span>';
+    return h;
+  }
+  function fixImgs(root){
+    var imgs=root.querySelectorAll('img');
+    for(var k=0;k<imgs.length;k++){imgs[k].addEventListener('error',function(){this.src=FALLBACK;});}
+  }
+
+  function tickClock(){
+    var d=new Date();
+    document.getElementById('clock').textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  }
+  tickClock();setInterval(tickClock,1000);
+  var ds=new Date().toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('dateNow').textContent=ds.charAt(0).toUpperCase()+ds.slice(1);
+
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement;
+    var p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1)*100;
+    document.getElementById('pbar').style.width=p+'%';
+  });
+
+  var views=132487,vEl=document.getElementById('views');
+  vEl.textContent=fmt(views);
+  setInterval(function(){views+=1+Math.floor(Math.random()*9);vEl.textContent=fmt(views);},1200);
+
+  var nums=document.querySelectorAll('.num');
+  function anim(el){
+    var t=parseInt(el.getAttribute('data-target'),10);
+    var suf=el.getAttribute('data-suffix')||'';
+    var st=null;
+    function step(ts){
+      if(!st)st=ts;
+      var p=Math.min((ts-st)/1500,1);
+      var e=p*(2-p);
+      el.textContent=fmt(Math.floor(t*e))+suf;
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  for(var i=0;i<nums.length;i++){anim(nums[i]);}
+
+  var toastT;
+  function toast(m){
+    var el=document.getElementById('toast');
+    el.textContent=m;el.classList.add('show');
+    clearTimeout(toastT);
+    toastT=setTimeout(function(){el.classList.remove('show')},2500);
+  }
+
+  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+  lb.addEventListener('click',function(){lb.style.display='none';});
+  document.getElementById('heroImg').addEventListener('click',function(){lbImg.src=this.src;lb.style.display='flex';});
+
+  function buildTicker(){
+    var all=getAll(),items=[];
+    for(var i=0;i<all.length&&items.length<6;i++)items.push(all[i].t);
+    var g='';
+    for(var j=0;j<items.length;j++)g+='<span>'+esc(items[j])+'</span>★';
+    document.getElementById('tickerTrack').innerHTML='<span class="tgroup">'+g+'</span><span class="tgroup">'+g+'</span>';
+  }
+  function buildStrip(){
+    var all=getAll(),ph=[];
+    for(var i=0;i<all.length;i++){var p=all[i].photos||[];for(var j=0;j<p.length;j++)if(ph.indexOf(p[j])<0)ph.push(p[j]);}
+    if(!ph.length)ph=[FALLBACK];
+    var h='';
+    for(var k=0;k<ph.length;k++)h+='<img loading="lazy" src="'+esc(ph[k])+'" alt="">';
+    document.getElementById('stripTrack').innerHTML=h+h;
+  }
+  function renderHero(){
+    var all=getAll(),h=null,i;
+    for(i=0;i<all.length;i++)if(all[i].hero){h=all[i];break;}
+    if(!h)h=DEFAULTS[0];
+    document.getElementById('heroTitle').textContent=h.t;
+    document.getElementById('heroLead').textContent=h.lead||'';
+    var th='';
+    for(i=0;i<(h.tags||[]).length;i++)th+='<span'+(i%2?' class="alt"':'')+'>'+esc(h.tags[i])+'</span>';
+    document.getElementById('heroTags').innerHTML=th||'<span>ГЛАВНОЕ</span>';
+    document.getElementById('heroImg').src=(h.photos&&h.photos.length)?h.photos[0]:FALLBACK;
+    var ps=(h.text||'').split(/\n+/),html='';
+    for(i=0;i<ps.length;i++){var s=ps[i].replace(/^\s+|\s+$/g,'');if(s)html+='<p>'+esc(s)+'</p>';}
+    document.getElementById('heroText').innerHTML=html;
+    buildStrip();
+  }
+
+  var curFilter='all';
+  function renderChips(){
+    var keys=['all','inc','saus','soc','cul'];
+    var names={all:'Все'};
+    for(var k in SECS)names[k]=SECS[k];
+    var h='';
+    for(var i=0;i<keys.length;i++){h+='<button class="chip'+(curFilter===keys[i]?' on':'')+'" data-f="'+keys[i]+'">'+names[keys[i]]+'</button>';}
+    var box=document.getElementById('chips');
+    box.innerHTML=h;
+    var btns=box.querySelectorAll('.chip');
+    for(var j=0;j<btns.length;j++){
+      btns[j].addEventListener('click',function(){curFilter=this.getAttribute('data-f');renderChips();renderFeed();});
+    }
+  }
+  function card(n){
+    var img=(n.photos&&n.photos.length)?n.photos[0]:FALLBACK;
+    return '<div class="mcard" data-id="'+n.id+'">'+(n.cust?'<span class="cbadge">🎤 КОРРЕСПОНДЕНТ</span>':'')+(isCorr?'<button class="editbtn" data-e="'+n.id+'">✏️</button>':'')+(isCorr&&n.cust?'<button class="cdel" data-d="'+n.id+'">✕</button>':'')+'<img loading="lazy" src="'+esc(img)+'" alt=""><div class="mt">'+tagsHtml(n.tags)+esc(n.t)+(n.lead?'<div class="msub">'+esc(n.lead)+'</div>':'')+'<div class="mmeta">🕐 '+esc(n.time||'')+' · '+esc(SECS[n.sec]||'Главное')+'</div></div></div>';
+  }
+  function bindGrid(grid){
+    fixImgs(grid);
+    var eds=grid.querySelectorAll('.editbtn');
+    for(var e=0;e<eds.length;e++){eds[e].addEventListener('click',function(ev){ev.stopPropagation();openEditor(this.getAttribute('data-e'));});}
+    var dels=grid.querySelectorAll('.cdel');
+    for(var d=0;d<dels.length;d++){dels[d].addEventListener('click',function(ev){ev.stopPropagation();var id=this.getAttribute('data-d');api('/api/save',{action:'del',id:id,pass:PASS}).then(function(r){if(r.ok){STATE.news=r.news||[];STATE.over=r.over||{};renderAll();route();toast('🗑 Новость удалена');}});});}
+    var cards=grid.querySelectorAll('.mcard');
+    for(var c=0;c<cards.length;c++){cards[c].addEventListener('click',function(){location.hash='#/news/'+this.getAttribute('data-id');});}
+  }
+  function renderFeed(){
+    var all=getAll(),html='',count=0;
+    for(var i=0;i<all.length;i++){
+      var n=all[i];
+      if(n.hero)continue;
+      if(curFilter!=='all'&&n.sec!==curFilter)continue;
+      count++;html+=card(n);
+    }
+    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В этом разделе пока пусто. Корреспондент может это исправить! 🐈</div>';
+    var grid=document.getElementById('feedGrid');
+    grid.innerHTML=html;
+    document.getElementById('feedTitle').textContent=curFilter==='all'?'ЛЕНТА НОВОСТЕЙ':'ЛЕНТА · '+SECS[curFilter].toUpperCase();
+    bindGrid(grid);
+  }
+
+  function showHome(){
+    document.getElementById('viewHome').style.display='block';
+    document.getElementById('viewSec').style.display='none';
+    document.getElementById('viewArticle').style.display='none';
+  }
+  function showSec(s){
+    if(!SECS[s]){showHome();return;}
+    document.getElementById('viewHome').style.display='none';
+    document.getElementById('viewArticle').style.display='none';
+    document.getElementById('viewSec').style.display='block';
+    document.getElementById('secTitle').textContent='РАЗДЕЛ · '+SECS[s].toUpperCase();
+    var all=getAll(),html='',count=0;
+    for(var i=0;i<all.length;i++){if(all[i].sec===s){count++;html+=card(all[i]);}}
+    if(!count)html='<div style="grid-column:1/-1;text-align:center;color:#999;padding:30px">В разделе пока пусто. Самое время для сенсации! 🐈</div>';
+    var grid=document.getElementById('secGrid');
+    grid.innerHTML=html;
+    bindGrid(grid);
+    window.scrollTo({top:0});
+  }
+  function showArticle(id){
+    var n=find(id);
+    if(!n){showHome();return;}
+    document.getElementById('viewHome').style.display='none';
+    document.getElementById('viewSec').style.display='none';
+    document.getElementById('viewArticle').style.display='block';
+    var i,html='<a class="backbtn" href="#/">← На главную</a>';
+    html+='<div>'+tagsHtml(n.tags)+'</div>';
+    html+='<h1>'+esc(n.t)+'</h1>';
+    html+='<div class="meta"><span>✍️ ОГОНЬ·24</span><span>🕐 '+esc(n.time||'')+'</span><span>📂 '+esc(SECS[n.sec]||'Главное')+'</span><span>👁 '+fmt(1000+Math.floor(Math.random()*9000))+'</span></div>';
+    if(n.lead)html+='<p class="lead">'+esc(n.lead)+'</p>';
+    var phs=(n.photos&&n.photos.length)?n.photos:[FALLBACK];
+    for(i=0;i<phs.length;i++)html+='<figure class="rphoto"><img src="'+esc(phs[i])+'" alt=""></figure>';
+    var ps=(n.text||'').split(/\n+/);
+    for(i=0;i<ps.length;i++){var s=ps[i].replace(/^\s+|\s+$/g,'');if(s)html+='<p style="margin:0 0 14px;line-height:1.75;font-size:17px">'+esc(s)+'</p>';}
+    html+='<div class="share"><span style="font-weight:700">Поделиться:</span><button>📨</button><button>💬</button><button>💥</button></div>';
+    if(isCorr)html+='<button class="btn-ghost" id="artEdit">✏️ Редактировать эту новость</button>';
+    var body=document.getElementById('artBody');
+    body.innerHTML=html;
+    fixImgs(body);
+    var z=body.querySelectorAll('img');
+    for(var k=0;k<z.length;k++){z[k].addEventListener('click',function(){lbImg.src=this.src;lb.style.display='flex';});}
+    if(isCorr){var be=document.getElementById('artEdit');if(be)be.addEventListener('click',function(){openEditor(id);});}
+    window.scrollTo({top:0});
+  }
+  function route(){
+    var h=location.hash||'#/';
+    var m=h.match(/^#\/sec\/(\w+)/);
+    var m2=h.match(/^#\/news\/(.+)$/);
+    if(m){showSec(m[1]);}
+    else if(m2){showArticle(decodeURIComponent(m2[1]));}
+    else{showHome();}
+  }
+  window.addEventListener('hashchange',route);
+
+  function renderComments(){
+    var arr=STATE.comments||[];
+    var html='';
+    for(var i=0;i<arr.length;i++){
+      var c=arr[i];
+      html+='<div class="comment"><div class="ava">'+esc(c.a||'💬')+'</div><div><div class="cname">'+esc(c.n||'Гость')+' '+(c.time?'<span class="ctime">'+esc(c.time)+'</span>':'')+'</div><div class="ctext">'+esc(c.t)+'</div></div></div>';
+    }
+    document.getElementById('clist').innerHTML=html||'<div style="color:#999;padding:10px">Пока нет комментариев. Будь первым!</div>';
+    document.getElementById('cHead').textContent='КОММЕНТАРИИ ('+arr.length+')';
+  }
+
+  var isCorr=false,editingId=null;
+  var modal=document.getElementById('corrModal');
+  var nTitle=document.getElementById('nTitle'),nLead=document.getElementById('nLead'),nText=document.getElementById('nText'),nPhotos=document.getElementById('nPhotos'),nSec=document.getElementById('nSec'),nDone=document.getElementById('nDone'),tagRow=document.getElementById('tagRow');
+  document.getElementById('corrBtn').addEventListener('click',function(){
+    modal.style.display='flex';
+    if(isCorr)openEditor(null);
+  });
+  document.getElementById('corrClose').addEventListener('click',function(){modal.style.display='none';});
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.style.display='none';});
+  function tryLogin(){
+    var v=document.getElementById('corrPass').value;
+    api('/api/login',{pass:v}).then(function(r){
+      if(r.ok){
+        isCorr=true;PASS=v;
+        document.getElementById('editHero').style.display='inline-block';
+        renderAll();route();
+        openEditor(null);
+        toast('🎤 Добро пожаловать в редакцию!');
+      }else{
+        document.getElementById('corrErr').textContent='Неверный пароль.';
+      }
+    }).catch(function(){document.getElementById('corrErr').textContent='База не отвечает. Проверь D1 в wrangler.toml.';});
+  }
+  document.getElementById('corrSubmit').addEventListener('click',tryLogin);
+  document.getElementById('corrPass').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
+  function openEditor(id){
+    editingId=id||null;
+    var n=id?find(id):null;
+    document.getElementById('edHead').textContent=n?'✏️ Редактировать новость':'📝 Создать новость';
+    nTitle.value=n?n.t:'';
+    nLead.value=n?(n.lead||''):'';
+    nText.value=n?(n.text||''):'';
+    nPhotos.value=n?(n.photos||[]).join('\n'):'';
+    nSec.value=n?(n.sec||'inc'):'inc';
+    var cbs=tagRow.querySelectorAll('input');
+    for(var i=0;i<cbs.length;i++){cbs[i].checked=!!(n&&n.tags&&n.tags.indexOf(cbs[i].value)>=0);}
+    nDone.textContent='';
+    document.getElementById('corrLogin').style.display='none';
+    document.getElementById('corrEditor').style.display='block';
+    modal.style.display='flex';
+  }
+  document.getElementById('editHero').addEventListener('click',function(){openEditor('egor');});
+  document.getElementById('nPublish').addEventListener('click',function(){
+    var t=nTitle.value.trim();
+    if(!t){nDone.textContent='⚠️ Заголовок обязателен!';return;}
+    var tags=[];
+    var cbs=tagRow.querySelectorAll('input:checked');
+    for(var i=0;i<cbs.length;i++)tags.push(cbs[i].value);
+    var item={id:editingId||('c'+Date.now()),t:t,lead:nLead.value.trim(),text:nText.value.trim(),photos:nPhotos.value.split('\n').map(function(s){return s.trim()}).filter(Boolean),tags:tags,sec:nSec.value,time:nowStr(),cust:1,hero:0};
+    var payload;
+    if(editingId&&isDefaultId(editingId)){
+      item.cust=0;item.hero=editingId==='egor'?1:0;
+      payload={action:'edit',def:1,id:editingId,item:item,pass:PASS};
+    }else if(editingId){
+      payload={action:'edit',id:editingId,item:item,pass:PASS};
+    }else{
+      payload={action:'add',item:item,pass:PASS};
+    }
+    api('/api/save',payload).then(function(r){
+      if(r.ok){
+        STATE.news=r.news||[];STATE.over=r.over||{};
+        nTitle.value='';nLead.value='';nText.value='';nPhotos.value='';
+        var cbs2=tagRow.querySelectorAll('input');
+        for(var k=0;k<cbs2.length;k++)cbs2[k].checked=false;
+        modal.style.display='none';
+        renderAll();route();
+        toast('✅ Опубликовано!');
+        burst();
+      }else{
+        nDone.textContent='⚠️ '+(r.err||'Ошибка сохранения');
+      }
+    }).catch(function(){nDone.textContent='⚠️ База не отвечает.';});
+  });
+
+  function renderAll(){renderHero();buildTicker();renderChips();renderFeed();}
+
+  var poll=[{l:'Бандит — герой года 🐈',v:5421},{l:'Вернуть игрушки! 🎄',v:2318},{l:'Держись, Егор 💪',v:4107}];
+  var voted=false,box=document.getElementById('pollBox');
+  function renderPoll(){
+    var total=0,i,html='';
+    for(i=0;i<poll.length;i++)total+=poll[i].v;
+    for(i=0;i<poll.length;i++){
+      var pc=Math.round(poll[i].v/total*100);
+      html+='<div class="poll-bar"><div class="fill" style="width:'+pc+'%">'+pc+'%</div></div><div style="font-size:12px;margin:-2px 0 8px;color:#6b6b6b">'+poll[i].l+' — '+fmt(poll[i].v)+'</div>';
+    }
+    html+='<div style="font-size:12px;color:#6b6b6b">Всего голосов: '+fmt(total)+' · Спасибо!</div>';
+    box.innerHTML=html;
+  }
+  function renderPollButtons(){
+    var html='';
+    for(var i=0;i<poll.length;i++){html+='<button type="button" class="poll-opt" data-i="'+i+'">'+poll[i].l+'</button>';}
+    box.innerHTML=html;
+    var btns=box.querySelectorAll('.poll-opt');
+    for(var j=0;j<btns.length;j++){
+      btns[j].addEventListener('click',function(){
+        if(voted)return;voted=true;
+        poll[parseInt(this.getAttribute('data-i'),10)].v++;
+        renderPoll();
+      });
+    }
+  }
+  renderPollButtons();
+
+  var clist=document.getElementById('clist');
+  document.getElementById('cform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var inp=document.getElementById('cinput');
+    var t=inp.value.trim();
+    if(!t)return;
+    api('/api/comment',{text:t}).then(function(r){
+      if(r.ok){STATE.comments=r.comments||[];renderComments();inp.value='';toast('💬 Комментарий сохранён!');}
+    }).catch(function(){toast('⚠️ База не отвечает');});
+  });
+
+  var EMO=['🎄','','🐈'];
+  function drop(){
+    var el=document.createElement('span');
+    el.className='drop';
+    el.textContent=EMO[Math.floor(Math.random()*EMO.length)];
+    el.style.left=(Math.random()*100)+'vw';
+    el.style.fontSize=(16+Math.random()*30)+'px';
+    el.style.animationDuration=(2.2+Math.random()*2.5)+'s';
+    document.body.appendChild(el);
+    el.addEventListener('animationend',function(){el.remove();});
+  }
+  function burst(){for(var i=0;i<50;i++){setTimeout(drop,i*35);}}
+  document.getElementById('rainBtn').addEventListener('click',burst);
+
+  api('/api/state').then(function(st){
+    if(st&&st.ok){STATE.news=st.news||[];STATE.over=st.over||{};STATE.comments=st.comments||[];}
+    renderAll();route();renderComments();
+  }).catch(function(){renderAll();route();renderComments();});
+})();
+</script>
+</body>
+</html>
