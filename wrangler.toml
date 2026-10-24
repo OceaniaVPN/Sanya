@@ -1,9 +1,0 @@
-name = "sanya-sausage-news"
-main = "index.js"
-compatibility_date = "2026-01-01"
-assets = { directory = "./public" }
-
-[[d1_databases]]
-binding = "DB"
-database_name = "ogn24"
-database_id = "5c3c44b9-84a1-4547-8f57-8e01feb69b35"
